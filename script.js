@@ -180,15 +180,43 @@ function renderUpcomingCard(ev) {
     card.appendChild(th); card.appendChild(body);
     return card;
 }
+// Small utility: fetch JSON with a safe fallback when network or file isn't available
+async function fetchJSONWithFallback(url, fallback = []) {
+    try {
+        const res = await fetch(url, { cache: 'no-cache' });
+        if (!res.ok) {
+            console.warn('fetchJSONWithFallback: non-OK response', url, res.status);
+            return fallback;
+        }
+        const data = await res.json();
+        return data;
+    } catch (err) {
+        console.warn('fetchJSONWithFallback: error fetching', url, err);
+        return fallback;
+    }
+}
 
-const coreTeam = [
-    { name: 'Sowjanya Reddy Jagganna', role: 'President', img: 'pictures/Sowjanya.jpeg' },
-    { name: 'Ramesh Jakkampudi', role: 'Vice President', img: 'pictures/Ramesh.jpeg' },
-    { name: 'Shhiva Pannem', role: 'Secretary', img: 'assets/people/shhiva.jpg' },
-    { name: 'Sidhesh Siddegowda', role: 'Treasurer', img: 'assets/people/sidhesh.jpg' },
-];
+// core team: load from data/coreTeam.json in the browser (fallback if fetch fails)
+let coreTeam = [];
+let coreLoaded = false;
+async function loadCoreTeam() {
+    coreTeam = await fetchJSONWithFallback('./data/coreTeam.json', []);
+    coreLoaded = Array.isArray(coreTeam) && coreTeam.length > 0;
+    console.info('loadCoreTeam:', coreLoaded ? 'loaded' : 'fallback', coreTeam.length || 0);
+    // update debug banner if present
+    const ds = document.getElementById('dataStatus');
+    if (ds) ds.textContent = `coreTeam: ${coreLoaded ? 'loaded' : 'fallback'} (${coreTeam.length || 0})`;
+    renderCore();
+}
+
 function renderCore() {
-    document.getElementById('coreCards').innerHTML = coreTeam.map(m => (
+    const host = document.getElementById('coreCards');
+    if (!host) return;
+    if (!coreLoaded) {
+        host.innerHTML = '<div class="hint">Loading core team…</div>';
+        return;
+    }
+    host.innerHTML = coreTeam.map(m => (
         `<div class="person-card">
         <img src="${m.img}" alt="${m.name}">
         <div class="name">${m.name}</div>
@@ -199,6 +227,7 @@ function renderCore() {
       </div>`
     )).join('');
 }
+
 const boardMembers = [
     { name: 'Balaram Singamsetty (Bala)', role: 'Board of Director', img: 'assets/people/bala.jpg' },
     { name: 'Raju Kakani', role: 'Board of Director', img: 'assets/people/raju.jpg' },
@@ -333,7 +362,8 @@ function startCountdown() {
     }
     tick(); clearInterval(startCountdown._int); startCountdown._int = setInterval(tick, 1000);
 }
-renderCore();
+// Load core team then render board and other UI pieces
+loadCoreTeam();
 renderBoard();
 renderCalendarAndEvents();
 startCountdown();
