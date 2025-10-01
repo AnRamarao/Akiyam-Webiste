@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+  Aikyam • Menifee — Static site
+  - Data is fetched from ./data/*.json by script.js
+  - Sections labeled for easier maintenance
+-->
 <html lang="en">
 
 <head>
@@ -6,8 +11,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aikyam • Menifee</title>
+  <meta name="description" content="Aikyam brings Menifee families together to celebrate culture, volunteer, and create opportunities for kids to shine through community events." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/branding/logo.png" />
 
 
 </head>
@@ -16,9 +25,10 @@
   <div class="tricolor" aria-hidden="true"></div>
 
   <div id="bg-zoom" aria-hidden="true">
-    <img id="bgZoomImg" src="pictures/6.png" alt="">
+    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="">
   </div>
 
+  <!-- ===== Header & Navigation ===== -->
   <header class="reveal" id="siteHeader">
     <div class="header-inner">
       <div>
@@ -26,7 +36,7 @@
           <div class="sweep"></div>
         </div>
         <div class="hero-logo-wrap" id="heroWrap" style="margin: 3px;">
-          <img class="hero-logo" id="heroLogo" src="pictures/5-modified.png" alt="Aikyam Logo"
+          <img class="hero-logo" id="heroLogo" src="assets/branding/logo.png" alt="Aikyam Logo"
             style="width:70px;height:70px;">
         </div>
       </div>
@@ -55,6 +65,7 @@
 
   <div id="scroll-progress"></div>
 
+  <!-- ===== Hero ===== -->
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-left">
@@ -75,12 +86,13 @@
           <div class="sweep"></div>
         </div>
         <div class="hero-logo-wrap">
-          <img class="hero-logo" src="pictures/6.png" alt="Aikyam Logo">
+          <img class="hero-logo" src="assets/branding/BgImage.png" alt="" aria-hidden="true">
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ===== Core Team ===== -->
   <section id="core" class="reveal">
     <div class="container">
       <h2 class="section-title">Core Team</h2>
@@ -96,6 +108,7 @@
     </div>
   </section>
 
+  <!-- ===== Board of Directors ===== -->
   <section id="board" class="reveal">
     <div class="container">
       <h2 class="section-title">Board of Directors</h2>
@@ -103,6 +116,7 @@
     </div>
   </section>
 
+  <!-- ===== Events (Past / Calendar / Upcoming) ===== -->
   <section id="events" class="reveal">
     <div class="container">
       <h2 class="section-title">Events</h2>
@@ -130,6 +144,7 @@
     </div>
   </section>
 
+  <!-- ===== Moments Gallery ===== -->
   <section id="gallery" class="reveal">
     <div class="container">
       <h2 class="section-title">Moments</h2>
@@ -139,6 +154,7 @@
     </div>
   </section>
 
+  <!-- ===== Member Reviews ===== -->
   <section id="reviews-section" class="reveal">
     <div class="container">
       <h2 class="section-title">Member Reviews</h2>
@@ -152,6 +168,7 @@
   </section>
 
   <!-- ============================== MEMBERS (NEW) =================== -->
+  <!-- ===== Members ===== -->
   <section id="members" class="reveal">
     <div class="container">
       <h2 class="section-title">Become a Member</h2>
@@ -184,6 +201,7 @@
   </section>
 
   <!-- ============================== REGISTER (EMBED) =================== -->
+  <!-- ===== Register ===== -->
   <section id="register" class="reveal">
     <div class="container">
       <h2 class="section-title">Register</h2>
@@ -212,6 +230,7 @@
   </section>
 
   <!-- =============================== VENDORS (NEW) ============================ -->
+  <!-- ===== Vendors & Partners ===== -->
   <section id="vendors" class="reveal">
     <div class="container">
       <h2 class="section-title">Vendors & Partners</h2>
@@ -238,6 +257,7 @@
   </section>
 
   <!-- =============================== DONATE (PRETTY + TOP DONORS) ============================ -->
+  <!-- ===== Donate ===== -->
   <section id="donate" class="reveal">
     <div class="container">
       <h2 class="section-title">Support Aikyam</h2>
@@ -346,6 +366,7 @@
     </div>
   </section>
 
+  <!-- ===== Contact ===== -->
   <section id="contact-section" class="reveal">
     <div class="container">
       <h2 class="section-title">Contact Us</h2>
@@ -354,7 +375,7 @@
         <p class="hint">Volunteer? Please reach out to <strong>Sowjanya Reddy Jagganna</strong>.</p>
         <p>Follow us:</p>
         <p>
-          <a target="_blank" rel="noopener" href="https://www.youtube.com/@BalaramnaiduDowney">YouTube</a> |
+          <a target="_blank" rel="noopener" href="https://www.youtube.com/@ManaAikyam">YouTube</a> |
           <a href="#">Facebook</a> |
           <a href="#">Instagram</a> |
           <a href="#">Twitter</a>
@@ -366,6 +387,7 @@
   <canvas id="fireworks-canvas"></canvas>
   <div id="toTop" title="Back to top">↑</div>
   <div id="toast"></div>
+  <!-- ===== Footer ===== -->
   <footer>
     &copy; 2025 Aikyam - Menifee, California • All Rights Reserved •
     <a target="_blank" rel="noopener" href="https://www.youtube.com/@BalaramnaiduDowney"

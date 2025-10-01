@@ -1,3 +1,10 @@
+/*
+  Aikyam Website — Frontend Script
+  - Vanilla JS for interactivity and data-driven rendering.
+  - Data is fetched from ./data/*.json at runtime (static hosting friendly).
+  - Keep behavior side-effect free on load; orchestrate via init().
+*/
+
 /* ===================== THEME TOGGLE (persisted) ==================== */
 const themeToggle = document.getElementById('themeToggle');
 (function initTheme() {
@@ -9,7 +16,12 @@ const themeToggle = document.getElementById('themeToggle');
   });
 })();
 
-/* ================== MOBILE NAV TOGGLE ================== */
+/* ================== MOBILE NAV TOGGLE ==================
+  Handles opening/closing the responsive nav. Ensures:
+  - Toggle via button
+  - Close on link tap / outside click
+  - Close on resize above mobile breakpoint
+*/
 (function () {
   const header = document.getElementById('siteHeader');
   const btn = document.getElementById('navToggle');
@@ -42,7 +54,9 @@ const themeToggle = document.getElementById('themeToggle');
   });
 })();
 
-/* ================== SCROLL PROGRESS & BACK-TO-TOP ================== */
+/* ================== SCROLL PROGRESS & BACK-TO-TOP ==================
+  Displays a top progress bar and a floating "back to top" button.
+*/
 (function () {
   const btn = document.getElementById('toTop');
   const prog = document.getElementById('scroll-progress');
@@ -55,7 +69,9 @@ const themeToggle = document.getElementById('themeToggle');
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
 
-/* ====================== BUTTON RIPPLE EFFECT ======================= */
+/* ====================== BUTTON RIPPLE EFFECT =======================
+  Small UI touch on .btn elements.
+*/
 document.addEventListener('click', (e) => {
   const b = e.target.closest('.btn');
   if (!b) return;
@@ -64,7 +80,9 @@ document.addEventListener('click', (e) => {
   b.appendChild(r); setTimeout(() => r.remove(), 620);
 });
 
-/* =================== BACKGROUND ZOOM ON SCROLL ===================== */
+/* =================== BACKGROUND ZOOM ON SCROLL =====================
+  Parallax-like zoom of the hero background image on scroll.
+*/
 (function () {
   const img = document.getElementById('bgZoomImg');
   function onScroll() {
@@ -78,24 +96,37 @@ document.addEventListener('click', (e) => {
   onScroll();
 })();
 
-/* ======================= REVEAL ON INTERSECT ======================= */
+/* ======================= REVEAL ON INTERSECT =======================
+  Adds .show to .reveal elements when they enter the viewport.
+*/
 (function () {
   const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }) }, { threshold: .22 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 })();
 
-/* ========================= DATA: EVENTS ============================ */
+/* ========================= DATA & HELPERS ============================ */
 // Data lists: will be populated from ./data/*.json at runtime
 let upcomingEvents = [];
 let completedEvents = [];
 
+/** Create an <img> element with a fallback and perf-friendly hints. */
 function makeImage(src, fallback, alt) {
+  const DEFAULT_FALLBACK = 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&auto=format&fit=crop';
   const im = document.createElement('img');
   im.src = src; im.alt = alt || '';
-  if (fallback) { im.onerror = () => { if (im.src !== fallback) im.src = fallback; }; }
+  im.loading = 'lazy';
+  im.decoding = 'async';
+  const fb = fallback || DEFAULT_FALLBACK;
+  im.addEventListener('error', () => { if (im.src !== fb) im.src = fb; }, { once: true });
   return im;
 }
 
+/**
+ * Build a vertical scrolling loop from items using a card renderer.
+ * @param {string} hostId - container element id
+ * @param {Array} items - list of data items
+ * @param {(item:any, index:number)=>HTMLElement} renderCard - card factory
+ */
 function buildVLoop(hostId, items, renderCard) {
   const host = document.getElementById(hostId);
   if (!host) return;
@@ -109,6 +140,7 @@ function buildVLoop(hostId, items, renderCard) {
   host.appendChild(wrap);
 }
 
+/** Render a completed event card. */
 function renderPastCard(ev) {
   const card = document.createElement('div'); card.className = 'event-card';
   const th = document.createElement('div'); th.className = 'event-thumb';
@@ -121,6 +153,10 @@ function renderPastCard(ev) {
   card.appendChild(th); card.appendChild(body);
   return card;
 }
+/**
+ * Create a data: URI representing a single VEVENT ICS file.
+ * @returns {string} data URI for download
+ */
 function makeICSDataURI(ev) {
   const dt = (s) => new Date(s).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
   const uid = ev.id + '@aikyam';
@@ -132,6 +168,8 @@ function makeICSDataURI(ev) {
   ].join('\r\n');
   return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
 }
+
+/** Render an upcoming/tbd event card with actions. */
 function renderUpcomingCard(ev) {
   const card = document.createElement('div'); card.className = 'event-card';
   const th = document.createElement('div'); th.className = 'event-thumb';
@@ -149,7 +187,13 @@ function renderUpcomingCard(ev) {
   card.appendChild(th); card.appendChild(body);
   return card;
 }
-// Small utility: fetch JSON with a safe fallback when network or file isn't available
+/**
+ * Small utility: fetch JSON with a safe fallback when network or file isn't available.
+ * @template T
+ * @param {string} url
+ * @param {T} fallback
+ * @returns {Promise<T>}
+ */
 async function fetchJSONWithFallback(url, fallback = []) {
   try {
     const res = await fetch(url, { cache: 'no-cache' });
@@ -166,33 +210,35 @@ async function fetchJSONWithFallback(url, fallback = []) {
 // core team: load from data/coreTeam.json in the browser (fallback if fetch fails)
 let coreTeam = [];
 let coreLoaded = false;
+/** Load core team list into memory (sets coreLoaded). */
 async function loadCoreTeam() {
   coreTeam = await fetchJSONWithFallback('./data/coreTeam.json', []);
   coreLoaded = Array.isArray(coreTeam) && coreTeam.length > 0;
 }
 
+/** Render core team cards. */
 function renderCore() {
   const host = document.getElementById('coreCards');
   if (!host) return;
-  if (!coreLoaded) {
-    host.innerHTML = '<div class="hint">Loading core team…</div>';
-    return;
-  }
-  host.innerHTML = coreTeam.map(m => (
-    `<div class="person-card">
-        <img src="${m.img}" alt="${m.name}">
-        <div class="name">${m.name}</div>
-        <div class="role">${m.role}</div>
-        <div style="margin-top:10px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap">
-          <span class="chip-mini">Menifee, CA</span>
-        </div>
-      </div>`
-  )).join('');
+  if (!coreLoaded) { host.innerHTML = '<div class="hint">Loading core team…</div>'; return; }
+  host.innerHTML = '';
+  coreTeam.forEach(m => {
+    const card = document.createElement('div'); card.className = 'person-card';
+    const img = makeImage(m.img, m.fallback, m.name); img.width = 180; img.height = 180;
+    const name = document.createElement('div'); name.className = 'name'; name.textContent = m.name;
+    const role = document.createElement('div'); role.className = 'role'; role.textContent = m.role;
+    const locWrap = document.createElement('div'); locWrap.style.cssText = 'margin-top:10px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap';
+    const loc = document.createElement('span'); loc.className = 'chip-mini'; loc.textContent = 'Menifee, CA';
+    locWrap.appendChild(loc);
+    card.appendChild(img); card.appendChild(name); card.appendChild(role); card.appendChild(locWrap);
+    host.appendChild(card);
+  });
 }
 
 let boardMembers = [];
 let vendors = [];
 
+/** Load events, vendors, and board members from JSON. */
 async function loadUpcomingEvents() {
   upcomingEvents = await fetchJSONWithFallback('./data/upcomingEvents.json', []);
 }
@@ -206,23 +252,25 @@ async function loadBoardMembers() {
   boardMembers = await fetchJSONWithFallback('./data/boardMembers.json', []);
 }
 
+/** Render board member cards. */
 function renderBoard() {
   const host = document.getElementById('boardCards');
   if (!host) return;
-  if (!Array.isArray(boardMembers) || boardMembers.length === 0) {
-    host.innerHTML = '<div class="hint">Board will be announced soon.</div>';
-    return;
-  }
-  host.innerHTML = boardMembers.map(m => (
-    `<div class="person-card">
-        <img src="${m.img}" alt="${m.name}">
-        <div class="name">${m.name}</div>
-        <div class="role">${m.role}</div>
-      </div>`
-  )).join('');
+  if (!Array.isArray(boardMembers) || boardMembers.length === 0) { host.innerHTML = '<div class="hint">Board will be announced soon.</div>'; return; }
+  host.innerHTML = '';
+  boardMembers.forEach(m => {
+    const card = document.createElement('div'); card.className = 'person-card';
+    const img = makeImage(m.img, m.fallback, m.name); img.width = 180; img.height = 180;
+    const name = document.createElement('div'); name.className = 'name'; name.textContent = m.name;
+    const role = document.createElement('div'); role.className = 'role'; role.textContent = m.role;
+    card.appendChild(img); card.appendChild(name); card.appendChild(role);
+    host.appendChild(card);
+  });
 }
 
+/** Date-only equality check. */
 function sameDate(a, b) { return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+/** Map yyyy-m-d -> count of events on that date for the calendar indicator. */
 function eventDateMap() {
   const m = {};
   upcomingEvents.forEach(ev => {
@@ -234,6 +282,7 @@ function eventDateMap() {
   });
   return m;
 }
+/** Render the mini calendar and the schedule list for upcoming events. */
 function renderCalendar() {
   const grid = document.getElementById('calendarGrid');
   const monthLbl = document.getElementById('calendarMonth');
@@ -285,6 +334,7 @@ function renderCalendar() {
   });
 }
 
+/** Small toast helper (non-blocking, auto-hides). */
 function toast(msg, ms = 1400) {
   const t = document.getElementById('toast');
   if (!t) return;
@@ -293,20 +343,23 @@ function toast(msg, ms = 1400) {
   toast._h = setTimeout(() => t.classList.remove('show'), ms);
 }
 
-/* =================== GALLERY MARQUEE =================== */
+/* =================== GALLERY MARQUEE ===================
+  Auto-scrolling gallery strip used for the Moments and vendor logos.
+*/
 (function () {
   const images = [
-    { src: 'pictures/1.jpg', label: 'Moment 1', fallback: 'https://images.unsplash.com/photo-1548020356-5a6d8924b7f8?q=80&w=1200&auto=format&fit=crop' },
-    { src: 'pictures/2.jpg', label: 'Moment 2', fallback: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop' },
-    { src: 'pictures/3.jpg', label: 'Moment 3', fallback: 'https://images.unsplash.com/photo-1520975922284-5fbc8da7e2f3?q=80&w=1200&auto=format&fit=crop' },
-    { src: 'pictures/4.jpg', label: 'Moment 4', fallback: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1200&auto=format&fit=crop' },
+    { src: 'assets/gallery/Gallery1.jpg', label: 'Moment 1', fallback: 'https://images.unsplash.com/photo-1548020356-5a6d8924b7f8?q=80&w=1200&auto=format&fit=crop' },
+    { src: 'assets/gallery/Gallery2.jpg', label: 'Moment 2', fallback: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop' },
+    { src: 'assets/gallery/Gallery3.jpg', label: 'Moment 3', fallback: 'https://images.unsplash.com/photo-1520975922284-5fbc8da7e2f3?q=80&w=1200&auto=format&fit=crop' },
+    { src: 'assets/gallery/Gallery4.jpg', label: 'Moment 4', fallback: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1200&auto=format&fit=crop' },
   ];
   const track = document.getElementById('gtrack');
   if (!track) return;
   function makeSlide(it) {
     const s = document.createElement('div'); s.className = 'gslide';
-    const im = document.createElement('img'); im.src = it.src; im.alt = it.label;
-    im.onerror = () => { if (it.fallback && im.src !== it.fallback) im.src = it.fallback; };
+  const im = document.createElement('img'); im.src = it.src; im.alt = it.label; im.loading = 'lazy'; im.decoding = 'async';
+  im.onerror = () => { if (it.fallback && im.src !== it.fallback) im.src = it.fallback; };
+  im.width = 440; im.height = 268;
     const lb = document.createElement('div'); lb.className = 'label'; lb.textContent = it.label;
     s.appendChild(im); s.appendChild(lb); return s;
   }
@@ -322,11 +375,13 @@ function toast(msg, ms = 1400) {
   requestAnimationFrame(loop);
 })();
 
+/** Render calendar and both past/upcoming vertical loops. */
 function renderCalendarAndEvents() {
   renderCalendar();
   buildVLoop('pastVLoop', completedEvents, renderPastCard);
   buildVLoop('upVLoop', upcomingEvents, renderUpcomingCard);
 }
+/** Live countdown to the next upcoming event. */
 function startCountdown() {
   const target = upcomingEvents.filter(e => !e.tbd && e.start && new Date(e.start).getTime() > Date.now())
     .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
@@ -344,22 +399,39 @@ function startCountdown() {
   tick(); clearInterval(startCountdown._int); startCountdown._int = setInterval(tick, 1000);
 }
 // Startup: load all JSON data then render the UI
+/**
+ * App bootstrap: fetch data in parallel, then render the UI.
+ */
 async function init() {
-  await Promise.all([
-    loadCoreTeam(),
-    loadBoardMembers(),
-    loadUpcomingEvents(),
-    loadCompletedEvents(),
-    loadVendors()
-  ]);
+  // Show per-section placeholders immediately
+  const coreHost = document.getElementById('coreCards');
+  const boardHost = document.getElementById('boardCards');
+  const vendorHost = document.getElementById('vendorGrid');
+  const pastHost = document.getElementById('pastVLoop');
+  const upHost = document.getElementById('upVLoop');
+  const calGrid = document.getElementById('calendarGrid');
+  const schedHost = document.getElementById('upcomingSchedule');
+  if (coreHost) coreHost.innerHTML = '<div class="hint">Loading core team…</div>';
+  if (boardHost) boardHost.innerHTML = '<div class="hint">Loading board…</div>';
+  if (vendorHost) vendorHost.innerHTML = '<div class="hint">Loading vendors…</div>';
+  if (pastHost) pastHost.innerHTML = '<div class="hint" style="padding:12px;">Loading events…</div>';
+  if (upHost) upHost.innerHTML = '<div class="hint" style="padding:12px;">Loading events…</div>';
+  if (calGrid) calGrid.innerHTML = '<div class="hint" style="grid-column: span 7; text-align:center;">Loading calendar…</div>';
+  if (schedHost) schedHost.innerHTML = '';
 
-  // render UI after data has been loaded
-  renderCore();
-  renderBoard();
-  renderCalendarAndEvents();
-  startCountdown();
-  renderVendors('All');
-  renderVendorMarquee();
+  // Kick off data loads in parallel and render as each completes
+  const pCore = loadCoreTeam().then(() => { renderCore(); });
+  const pBoard = loadBoardMembers().then(() => { renderBoard(); });
+  const pEvents = Promise.all([loadUpcomingEvents(), loadCompletedEvents()]).then(() => {
+    renderCalendarAndEvents();
+    startCountdown();
+  });
+  const pVendors = loadVendors().then(() => {
+    renderVendors('All');
+    renderVendorMarquee();
+  });
+
+  await Promise.all([pCore, pBoard, pEvents, pVendors]);
 }
 
 init();
@@ -524,7 +596,7 @@ function renderVendorMarquee() {
   if (!Array.isArray(vendors) || vendors.length === 0) return;
   function makeLogo(v) {
     const s = document.createElement('div'); s.className = 'gslide'; s.style.width = '280px'; s.style.height = '120px';
-    const im = document.createElement('img'); im.src = v.logo; im.alt = v.name;
+  const im = document.createElement('img'); im.src = v.logo; im.alt = v.name; im.loading = 'lazy'; im.decoding = 'async';
     im.onerror = () => { im.src = 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&auto=format&fit=crop'; };
     const lb = document.createElement('div'); lb.className = 'label'; lb.textContent = v.name;
     s.appendChild(im); s.appendChild(lb); return s;
