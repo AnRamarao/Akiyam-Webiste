@@ -1,0 +1,26 @@
+[
+  {
+    "id": "past_pongal",
+    "title": "Pongal Festival",
+    "date": "2025-01-18",
+    "img": "assets/events/past-pongal.jpg",
+    "fallback": "https://images.unsplash.com/photo-1542367597-8849eb00b2c2?q=80&w=1200&auto=format&fit=crop",
+    "summary": "Harvest celebrations with traditional food & festivities."
+  },
+  {
+    "id": "past_ugadhi",
+    "title": "Ugadhi",
+    "date": "2025-03-30",
+    "img": "assets/events/past-ugadi.jpg",
+    "fallback": "https://images.unsplash.com/photo-1578926374377-5a3f78c19c6f?q=80&w=1200&auto=format&fit=crop",
+    "summary": "Telugu New Year with joy, culture, tradition."
+  },
+  {
+    "id": "past_independence",
+    "title": "Independence Day Celebration",
+    "date": "2025-08-15",
+    "img": "assets/events/past-independence.jpg",
+    "fallback": "https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=1200&auto=format&fit=crop",
+    "summary": "Pride, parade, and community spirit."
+  }
+]
