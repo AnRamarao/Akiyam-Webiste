@@ -56,7 +56,10 @@ body {
   line-height: 1.75;
 }
 
-img { max-width: 100%; height: auto; }
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 /* Note: theme is controlled by the toggle; system preference handled in JS */
 

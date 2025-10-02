@@ -357,9 +357,9 @@ function toast(msg, ms = 1400) {
   if (!track) return;
   function makeSlide(it) {
     const s = document.createElement('div'); s.className = 'gslide';
-  const im = document.createElement('img'); im.src = it.src; im.alt = it.label; im.loading = 'lazy'; im.decoding = 'async';
-  im.onerror = () => { if (it.fallback && im.src !== it.fallback) im.src = it.fallback; };
-  im.width = 440; im.height = 268;
+    const im = document.createElement('img'); im.src = it.src; im.alt = it.label; im.loading = 'lazy'; im.decoding = 'async';
+    im.onerror = () => { if (it.fallback && im.src !== it.fallback) im.src = it.fallback; };
+    im.width = 440; im.height = 268;
     const lb = document.createElement('div'); lb.className = 'label'; lb.textContent = it.label;
     s.appendChild(im); s.appendChild(lb); return s;
   }
@@ -596,7 +596,7 @@ function renderVendorMarquee() {
   if (!Array.isArray(vendors) || vendors.length === 0) return;
   function makeLogo(v) {
     const s = document.createElement('div'); s.className = 'gslide'; s.style.width = '280px'; s.style.height = '120px';
-  const im = document.createElement('img'); im.src = v.logo; im.alt = v.name; im.loading = 'lazy'; im.decoding = 'async';
+    const im = document.createElement('img'); im.src = v.logo; im.alt = v.name; im.loading = 'lazy'; im.decoding = 'async';
     im.onerror = () => { im.src = 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&auto=format&fit=crop'; };
     const lb = document.createElement('div'); lb.className = 'label'; lb.textContent = v.name;
     s.appendChild(im); s.appendChild(lb); return s;
