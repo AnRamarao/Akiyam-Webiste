@@ -1,0 +1,56 @@
+[
+  {
+    "id": "evt_ganesh25",
+    "title": "Ganesh Chaturthi",
+    "start": "2025-09-07T17:00:00",
+    "end": "2025-09-07T20:00:00",
+    "location": "Menifee Community Center",
+    "price": 0,
+    "img": "assets/events/ganesh.jpg",
+    "fallback": "https://images.unsplash.com/photo-1600011689032-8c3e7b80eb75?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Community puja, aarthi, and prasadam. Family friendly."
+  },
+  {
+    "id": "evt_service25",
+    "title": "Community Service Day",
+    "start": "2025-09-28T09:00:00",
+    "end": "2025-09-28T12:00:00",
+    "location": "Alderwood Park",
+    "price": 0,
+    "img": "assets/events/service-day.jpg",
+    "fallback": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Park clean-up & care packages. Service hours for students."
+  },
+  {
+    "id": "evt_navratri25",
+    "title": "Navratri Garba Night",
+    "start": "2025-10-04T18:30:00",
+    "end": "2025-10-04T22:00:00",
+    "location": "Heritage Lake Clubhouse",
+    "price": 15,
+    "img": "assets/events/garba.jpg",
+    "fallback": "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Traditional garba & dandiya. Dress in your best!"
+  },
+  {
+    "id": "evt_mg_oct31",
+    "title": "Meet & Greet",
+    "start": "2025-10-31T18:00:00",
+    "end": "2025-10-31T19:30:00",
+    "location": "TBD",
+    "price": 0,
+    "img": "assets/events/meet-greet.jpg",
+    "fallback": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Casual networking and community-building session."
+  },
+  {
+    "id": "evt_diwali25",
+    "title": "Diwali Mela & Cultural Night",
+    "tbd": true,
+    "location": "TBD",
+    "price": 25,
+    "img": "assets/events/diwali.jpg",
+    "fallback": "https://images.unsplash.com/photo-1545424273-19f5aa36a2fa?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Festival of Lights — November (date TBD)."
+  }
+]

@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Menifee Motors",
+        "cat": "Services",
+        "logo": "assets/vendors/menifee-motors.jpg",
+        "url": "#",
+        "blurb": "Trusted local auto care & sponsors."
+    },
+    {
+        "name": "Spice Route Kitchen",
+        "cat": "Food",
+        "logo": "assets/vendors/spice-route.jpg",
+        "url": "#",
+        "blurb": "Homestyle Indian meals & catering."
+    },
+    {
+        "name": "Little Learners Academy",
+        "cat": "Education",
+        "logo": "assets/vendors/learners.jpg",
+        "url": "#",
+        "blurb": "After-school & tutoring programs."
+    },
+    {
+        "name": "Saree & Shine Boutique",
+        "cat": "Boutique",
+        "logo": "assets/vendors/saree-shine.jpg",
+        "url": "#",
+        "blurb": "Ethnic wear, jewelry & gifts."
+    },
+    {
+        "name": "Chai Junction",
+        "cat": "Food",
+        "logo": "assets/vendors/chai-junction.jpg",
+        "url": "#",
+        "blurb": "Masala chai, snacks & sweets."
+    },
+    {
+        "name": "Heritage Lake Realty",
+        "cat": "Services",
+        "logo": "assets/vendors/heritage-realty.jpg",
+        "url": "#",
+        "blurb": "Neighborhood real estate experts."
+    }
+]

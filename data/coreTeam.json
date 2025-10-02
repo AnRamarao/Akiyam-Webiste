@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Sowjanya Reddy Jagganna",
+    "role": "President",
+    "img": "assets/people/Sowjanya.jpeg"
+  },
+  {
+    "name": "Ramesh Jakkampudi",
+    "role": "Vice President",
+    "img": "assets/people/Ramesh.jpeg"
+  },
+  {
+    "name": "Shhiva Pannem",
+    "role": "Secretary",
+    "img": "assets/shhiva.jpg"
+  },
+  {
+    "name": "Sidhesh Siddegowda",
+    "role": "Treasurer",
+    "img": "assets/sidhesh.jpg"
+  }
+]

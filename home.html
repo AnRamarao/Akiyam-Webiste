@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!--
+  Aikyam • Menifee — Static site
+  - Data is fetched from ./data/*.json by script.js
+  - Sections labeled for easier maintenance
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aikyam • Menifee</title>
+  <meta name="description"
+    content="Aikyam brings Menifee families together to celebrate culture, volunteer, and create opportunities for kids to shine through community events." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/branding/logo.png" />
+
+
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="">
+  </div>
+
+  <!-- ===== Header & Navigation ===== -->
+  <header class="reveal" id="siteHeader">
+    <div class="header-inner">
+      <div>
+        <div class="sunburst" aria-hidden="true" style="width:80px;height:80px;">
+          <div class="sweep"></div>
+        </div>
+        <div class="hero-logo-wrap" id="heroWrap" style="margin: 3px;">
+          <img class="hero-logo" id="heroLogo" src="assets/branding/logo.png" alt="Aikyam Logo"
+            style="width:70px;height:70px;">
+        </div>
+      </div>
+
+      <!-- ===== Updated NAV with mobile toggle ===== -->
+      <nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#core">Core Team</a>
+          <a href="#board">Board</a>
+          <a href="#events">Events</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#reviews-section">Reviews</a>
+          <a href="#members">Members</a>
+          <a href="#vendors">Vendors</a>
+          <a href="#register">Register</a>
+          <a href="#donate">Donate</a>
+          <a href="#contact-section">Contact</a>
+        </div>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle"> ☀/🌙</button>
+    </div>
+  </header>
+
+  <div id="scroll-progress"></div>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-left">
+        <h1 class="hero-title">Unity in Diversity,<br />Community in Action</h1>
+        <p class="tagline">Aikyam brings Menifee families together to celebrate culture, volunteer, and create chances
+          for kids to shine.</p>
+        <div class="next-title">Next up: <span id="nextEventTitle">—</span></div>
+        <div class="countdown" id="countdown" aria-label="countdown"></div>
+        <div class="cta-row">
+          <a class="btn" href="#events">See Events</a>
+          <a class="btn secondary" href="#register">Register</a>
+          <a class="btn secondary" target="_blank" rel="noopener"
+            href="https://www.youtube.com/@BalaramnaiduDowney">YouTube</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="sunburst" aria-hidden="true">
+          <div class="sweep"></div>
+        </div>
+        <div class="hero-logo-wrap">
+          <img class="hero-logo" src="assets/branding/BgImage.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Core Team ===== -->
+  <section id="core" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Core Team</h2>
+      <div class="cards" id="coreCards"></div>
+      <div class="mv">
+        <h4>Mission</h4>
+        <p>To inspire and empower the next generation by nurturing cultural pride, fostering community unity, and
+          creating opportunities for children and families to celebrate, learn, and grow together.</p>
+        <h4 style="margin-top:10px;">Vision</h4>
+        <p>A vibrant, inclusive home where every family belongs, every child leads with pride, and our diversity
+          strengthens the city we love.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Board of Directors ===== -->
+  <section id="board" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Board of Directors</h2>
+      <div class="cards" id="boardCards"></div>
+    </div>
+  </section>
+
+  <!-- ===== Events (Past / Calendar / Upcoming) ===== -->
+  <section id="events" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Events</h2>
+      <div class="events-3col">
+        <div class="col l">
+          <h3 class="subhead">Past Events</h3>
+          <div class="vloop" id="pastVLoop" style="--vspd:38s"></div>
+        </div>
+        <div class="col m">
+          <h3 class="subhead">Calendar</h3>
+          <div class="calendar-card">
+            <div class="calendar-head">
+              <strong>Mini Calendar</strong>
+              <span class="pill" id="calendarMonth"></span>
+            </div>
+            <div class="calendar-grid" id="calendarGrid" aria-label="Mini Calendar"></div>
+            <div class="schedule" id="upcomingSchedule" aria-label="Upcoming schedule"></div>
+          </div>
+        </div>
+        <div class="col r">
+          <h3 class="subhead">Upcoming Events</h3>
+          <div class="vloop" id="upVLoop" style="--vspd:44s"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Moments Gallery ===== -->
+  <section id="gallery" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Moments</h2>
+      <div class="wrap">
+        <div class="gtrack" id="gtrack"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Member Reviews ===== -->
+  <section id="reviews-section" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Member Reviews</h2>
+      <div class="reviews"
+        style="display:flex;gap:18px;justify-content:center;align-items:stretch;width:var(--maxw);margin:0 auto;">
+        <div class="review card">“Wonderful platform to celebrate culture and connect with families.”</div>
+        <div class="review card">“Kids loved participating in the festivities and activities.”</div>
+        <div class="review card">“Great community spirit and well organized events.”</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== MEMBERS (NEW) =================== -->
+  <!-- ===== Members ===== -->
+  <section id="members" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Become a Member</h2>
+      <div class="reg-wrap">
+        <div class="embed">
+          <div class="embed-head">
+            <span class="badge">Community Membership</span>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <span class="hint">Prefer a new tab?</span>
+              <a class="btn link" target="_blank" rel="noopener" href="https://forms.gle/jTLazxmQaGQxHDDEA">Open Google
+                Form</a>
+            </div>
+          </div>
+          <div class="embed-body">
+            <iframe src="https://forms.gle/jTLazxmQaGQxHDDEA" allow="payment *; clipboard-write *;"></iframe>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:6px;">Member Perks</h3>
+          <ul>
+            <li>Priority access to cultural nights & kid showcases</li>
+            <li>Member-only updates & volunteer sign-ups</li>
+            <li>Early bird pricing for major events</li>
+            <li>Vendor discounts from our partners</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== REGISTER (EMBED) =================== -->
+  <!-- ===== Register ===== -->
+  <section id="register" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Register</h2>
+      <div class="reg-wrap">
+        <div class="embed">
+          <div class="embed-head">
+            <span class="badge">Official Form</span>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <span class="hint">Prefer a new tab?</span>
+              <a class="btn link" target="_blank" rel="noopener" href="https://forms.gle/QVvLzs9ZRPxx1EYv9">Open Google
+                Form</a>
+            </div>
+          </div>
+          <div class="embed-body">
+            <iframe src="https://forms.gle/QVvLzs9ZRPxx1EYv9" allow="payment *; clipboard-write *;"></iframe>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:6px;">Tips</h3>
+          <div class="hint">After you submit, you’ll see a confirmation message from Google Forms. If the form doesn’t
+            load, click “Open Google Form”.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================== VENDORS (NEW) ============================ -->
+  <!-- ===== Vendors & Partners ===== -->
+  <section id="vendors" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Vendors & Partners</h2>
+      <div class="card" style="margin-bottom:14px;">
+        <div
+          style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:10px;">
+          <span class="pill">Filter:</span>
+          <button class="btn mini secondary" data-filter="All">All</button>
+          <button class="btn mini secondary" data-filter="Food">Food</button>
+          <button class="btn mini secondary" data-filter="Boutique">Boutique</button>
+          <button class="btn mini secondary" data-filter="Education">Education</button>
+          <button class="btn mini secondary" data-filter="Services">Services</button>
+        </div>
+        <div id="vendorGrid"></div>
+        <div class="hint" style="text-align:center; margin-top:8px;">Want to be listed? Email <a
+            href="mailto:info@aikyam.com">info@aikyam.com</a> with your logo, category, and a short blurb.</div>
+      </div>
+
+      <div class="wrap"
+        style="overflow:hidden;border-radius:16px;border:1px solid var(--brd);background:var(--card);box-shadow:var(--shadow);">
+        <div id="vendorMarquee" class="gtrack" style="gap:18px; padding:14px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================== DONATE (PRETTY + TOP DONORS) ============================ -->
+  <!-- ===== Donate ===== -->
+  <section id="donate" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Support Aikyam</h2>
+
+      <div class="donate-grid">
+        <!-- Left: Fancy donation hero + form -->
+        <div class="donate-hero">
+          <div class="sunburst" aria-hidden="true"
+            style="width:220px;height:220px; right:-60px; top:-60px; position:absolute; opacity:.8;">
+            <div class="sweep"></div>
+          </div>
+
+          <h3>Help power culture, service, and youth leadership</h3>
+          <p>Every dollar supports events, kids’ activities, and community service projects in Menifee.</p>
+
+          <div class="progress" aria-label="progress to goal">
+            <div id="donationBar" class="bar"></div>
+          </div>
+          <div class="meta">
+            <span class="pill">Goal: <span id="goalLbl">$5,000</span></span>
+            <span class="pill">Raised: <span id="raisedLbl">$2,860</span></span>
+            <span class="pill">Donors: <span id="donorsLbl">73</span></span>
+          </div>
+
+          <!-- Form -->
+          <form class="donation-form" id="donationForm">
+            <div class="input-row">
+              <input class="input" type="text" id="donorName" placeholder="Your Name" required>
+              <input class="input" type="email" id="donorEmail" placeholder="Your Email" required>
+            </div>
+
+            <div style="margin-top:12px;">
+              <div class="hint" style="margin-bottom:6px;">Choose an amount</div>
+              <div class="amount-grid" id="amountGrid">
+                <button type="button" class="amount-btn" data-amt="10">$10</button>
+                <button type="button" class="amount-btn" data-amt="25">$25</button>
+                <button type="button" class="amount-btn" data-amt="50">$50</button>
+                <button type="button" class="amount-btn" data-amt="100">$100</button>
+                <button type="button" class="amount-btn" data-amt="250">$250</button>
+                <button type="button" class="amount-btn" data-amt="500">$500</button>
+              </div>
+
+              <div class="custom-amount">
+                <span class="pill">Custom</span>
+                <input class="input" type="number" id="customAmount" min="1" step="1" placeholder="$ Amount">
+              </div>
+            </div>
+
+            <div class="donate-actions">
+              <label class="switch">
+                <input type="checkbox" id="recurring">
+                <span>Make this monthly</span>
+              </label>
+              <button type="submit" class="btn">Donate Now</button>
+              <span id="donateMsg" class="hint"></span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Top Donors -->
+        <aside class="leaderboard">
+          <div class="head">
+            <span class="title">Top Donors</span>
+            <span class="pill">This Month</span>
+          </div>
+          <div class="donor-list" id="donorList">
+            <div class="donor">
+              <div class="avatar" aria-hidden="true">🥇</div>
+              <div>
+                <div class="name">Priya N.</div>
+                <div class="hint">“For the kids’ cultural night!”</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="amt">$750</div>
+                <div class="rank gold">#1</div>
+              </div>
+            </div>
+            <div class="donor">
+              <div class="avatar" aria-hidden="true">🥈</div>
+              <div>
+                <div class="name">Arjun & Meera</div>
+                <div class="hint">Community Service Day</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="amt">$500</div>
+                <div class="rank silver">#2</div>
+              </div>
+            </div>
+            <div class="donor">
+              <div class="avatar" aria-hidden="true">🥉</div>
+              <div>
+                <div class="name">Menifee Motors</div>
+                <div class="hint">Local business sponsor</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="amt">$300</div>
+                <div class="rank bronze">#3</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hint" style="margin-top:12px;text-align:center;">Want to be featured? Large gifts and recurring
+        support help us plan bigger opportunities for kids. 💛</div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact-section" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact">
+        <p>Email: <a href="mailto:info@aikyam.com">info@aikyam.com</a></p>
+        <p class="hint">Volunteer? Please reach out to <strong>Sowjanya Reddy Jagganna</strong>.</p>
+        <p>Follow us:</p>
+        <p>
+          <a target="_blank" rel="noopener" href="https://www.youtube.com/@ManaAikyam">YouTube</a> |
+          <a href="#">Facebook</a> |
+          <a href="#">Instagram</a> |
+          <a href="#">Twitter</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <canvas id="fireworks-canvas"></canvas>
+  <div id="toTop" title="Back to top">↑</div>
+  <div id="toast"></div>
+  <!-- ===== Footer ===== -->
+  <footer>
+    &copy; 2025 Aikyam - Menifee, California • All Rights Reserved •
+    <a target="_blank" rel="noopener" href="https://www.youtube.com/@BalaramnaiduDowney"
+      style="color:var(--accent);font-weight:900;">Our YouTube</a>
+  </footer>
+  <script src="script.js" defer></script>
+</body>
+
+</html>
