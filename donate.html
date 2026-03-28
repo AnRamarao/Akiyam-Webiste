@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--
+  AIKYAM • Donate Page
+  - Donation form and donor leaderboard
+  - Data is fetched from ./data/*.json by script.js
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Support AIKYAM's mission to bring families together through cultural celebrations and community events. Every donation helps fund festivals, kids showcases, and community engagement." />
+  <meta name="keywords" content="donate AIKYAM, support community events, cultural celebrations donation, community volunteering funding" />
+  <meta name="author" content="AIKYAM" />
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Support AIKYAM - Donate to Community Events" />
+  <meta property="og:description" content="Support AIKYAM's mission to bring families together through cultural celebrations and community events." />
+  <meta property="og:image" content="assets/branding/logo.png" />
+  <meta property="og:url" content="https://aikyamusa.org/donate.html" />
+  
+  <!-- Performance optimizations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/branding/logo.png" type="image/png" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="">
+  </div>
+
+  <!-- Header will be loaded by JavaScript -->
+  <div id="header-placeholder"></div>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="hero-alt">
+    <div class="container">
+      <h1>Support AIKYAM</h1>
+      <p class="tagline">Help power culture, service, and youth leadership in our community. Every donation makes a difference.</p>
+    </div>
+  </section>
+
+  <!-- ===== Donate Section ===== -->
+  <section id="donate" class="reveal">
+    <div class="container">
+      <div class="donate-grid">
+        <!-- Left: Fancy donation hero + form -->
+        <div class="donate-hero">
+          <div class="sunburst donate-sunburst" aria-hidden="true">
+            <div class="sweep"></div>
+          </div>
+
+          <h3>Help power culture, service, and youth leadership</h3>
+          <p>Every dollar supports events, kids' activities, and community service projects in our area.</p>
+
+          <div class="progress" aria-label="progress to goal">
+            <div id="donationBar" class="bar"></div>
+          </div>
+          <div class="meta">
+            <span class="pill">Goal: <span id="goalLbl">$5,000</span></span>
+            <span class="pill">Raised: <span id="raisedLbl">$2,860</span></span>
+            <span class="pill">Donors: <span id="donorsLbl">73</span></span>
+          </div>
+
+          <!-- Form -->
+          <form class="donation-form" id="donationForm">
+            <div class="input-row">
+              <input class="input" type="text" id="donorName" placeholder="Your Name" required>
+              <input class="input" type="email" id="donorEmail" placeholder="Your Email" required>
+            </div>
+
+            <div class="donate-amount-section">
+              <div class="hint donate-amount-hint">Choose an amount</div>
+              <div class="amount-grid" id="amountGrid">
+                <button type="button" class="amount-btn" data-amt="10">$10</button>
+                <button type="button" class="amount-btn" data-amt="25">$25</button>
+                <button type="button" class="amount-btn" data-amt="50">$50</button>
+                <button type="button" class="amount-btn" data-amt="100">$100</button>
+                <button type="button" class="amount-btn" data-amt="250">$250</button>
+                <button type="button" class="amount-btn" data-amt="500">$500</button>
+              </div>
+
+              <div class="custom-amount">
+                <span class="pill">Custom</span>
+                <input class="input" type="number" id="customAmount" min="1" step="1" placeholder="$ Amount">
+              </div>
+            </div>
+
+            <div class="donate-actions">
+              <label class="switch">
+                <input type="checkbox" id="recurring">
+                <span>Make this monthly</span>
+              </label>
+              <button type="submit" class="btn">Donate Now</button>
+              <span id="donateMsg" class="hint"></span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Top Donors -->
+        <aside class="leaderboard">
+          <div class="head">
+            <span class="title">Top Donors</span>
+            <span class="pill">This Month</span>
+          </div>
+          <div class="donor-list" id="donorList">
+            <div class="donor">
+              <div class="avatar" aria-hidden="true">🥇</div>
+              <div>
+                <div class="name">Priya N.</div>
+                <div class="hint">"For the kids' cultural night!"</div>
+              </div>
+              <div class="text-align-right">
+                <div class="amt">$750</div>
+                <div class="rank gold">#1</div>
+              </div>
+            </div>
+            <div class="donor">
+              <div class="avatar" aria-hidden="true">🥈</div>
+              <div>
+                <div class="name">Arjun & Meera</div>
+                <div class="hint">Community Service Day</div>
+              </div>
+              <div class="text-align-right">
+                <div class="amt">$500</div>
+                <div class="rank silver">#2</div>
+              </div>
+            </div>
+            <div class="donor">
+              <div class="avatar" aria-hidden="true">🥉</div>
+              <div>
+                <div class="name">Business Sponsor</div>
+                <div class="hint">Local business sponsor</div>
+              </div>
+              <div class="text-align-right">
+                <div class="amt">$300</div>
+                <div class="rank bronze">#3</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hint donate-feature-hint">Want to be featured? Large gifts and recurring
+        support help us plan bigger opportunities for kids. 💛</div>
+    </div>
+  </section>
+
+  <!-- ===== Questions? ===== -->
+  <section class="reveal donate-questions-section">
+    <div class="container">
+      <div class="donate-questions-content">
+        <h3 class="donate-questions-title">Have Questions About Donating?</h3>
+        <p class="donate-questions-text">
+          Our team is here to help! Whether you need assistance with donations, want to learn about sponsorship opportunities, 
+          or have other questions, we'd love to hear from you.
+        </p>
+        <a href="contact.html" class="btn">Contact Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <canvas id="fireworks-canvas"></canvas>
+  <div id="toTop" title="Back to top">↑</div>
+  <div id="toast"></div>
+  
+  <!-- Footer will be loaded by JavaScript -->
+  <div id="footer-placeholder"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

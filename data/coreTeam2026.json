@@ -1,0 +1,23 @@
+[
+  
+  {
+    "name": "Ramesh Jakkampudi",
+    "role": "President",
+    "img": "assets/people/Ramesh.jpeg"
+  },
+  {
+    "name": "Shhiva Pannem",
+    "role": "Vice President",
+    "img": "assets/people/Shhiva.jpeg"
+  },
+  {
+    "name": "Sidhesh Siddegowda",
+    "role": "Secretary",
+    "img": "assets/people/Sidhesh.jpeg"
+  },
+  {
+    "name": "Raja Reddy",
+    "role": "Treasurer",
+    "img": "assets/people/RajaReddy.jpeg"
+  }
+]

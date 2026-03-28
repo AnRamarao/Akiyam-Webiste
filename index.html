@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AIKYAM - Community Events & Cultural Celebrations | California</title>
+  <meta name="description"
+    content="Join AIKYAM for cultural celebrations, family events, and community volunteering. Bringing families together through festivals, kids showcases, and community engagement in California." />
+  <meta name="keywords"
+    content="AIKYAM, community events, cultural celebrations, family activities, volunteering, festivals, California, Indian community, cultural pride, kids showcase" />
+  <meta name="author" content="AIKYAM" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AIKYAM - Community Events & Cultural Celebrations" />
+  <meta property="og:description"
+    content="Join AIKYAM for cultural celebrations, family events, and community volunteering in California." />
+  <meta property="og:image" content="assets/branding/logo.png" />
+  <meta property="og:url" content="https://aikyamusa.org/" />
+
+  <link rel="canonical" href="https://aikyamusa.org/" />
+  <link rel="icon" type="image/png" href="assets/branding/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background" loading="eager">
+  </div>
+
+  <!-- Header will be loaded by JavaScript -->
+  <div id="header-placeholder"></div>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="home" role="banner">
+    <div class="container">
+      <div class="hero-left">
+        <!-- Mission & Vision clean text -->
+        <div class="mission-vision">
+          <h4>Mission</h4>
+          <p>To inspire and empower the next generation by nurturing cultural pride, fostering community unity, and
+            creating opportunities for children and families to celebrate, learn, and grow together.</p>
+
+          <h4>Vision</h4>
+          <p>A vibrant, inclusive home where every family belongs, every child leads with pride, and our diversity
+            strengthens the city we love.</p>
+        </div>
+
+       
+
+        <div class="next-title">Next up: <span id="nextEventTitle">—</span></div>
+        <div class="countdown" id="countdown" aria-label="Event countdown timer" role="timer"></div>
+
+        <div class="cta-row">
+          <a class="btn btn--primary" href="#events" aria-label="Navigate to events section">See Events</a>
+          <a class="btn btn--secondary" href="join.html" aria-label="Join AIKYAM community">Join Us</a>
+          <a class="btn btn--secondary" target="_blank" rel="noopener" href="https://www.youtube.com/@ManaAIKYAM"
+            aria-label="Visit AIKYAM YouTube channel (opens in new tab)">YouTube</a>
+        </div>
+          <div class="cta-row">
+          <a class="btn btn--highlight" href="fillout.html" aria-label="Open AIKYAM fillout form">2026-Q1 Pickleball Registration</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="sunburst" aria-hidden="true">
+          <div class="sweep"></div>
+        </div>
+        <div class="hero-logo-wrap">
+          <img class="hero-logo" src="assets/branding/logo.png" alt="AIKYAM hero image" loading="eager">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Team ===== -->
+  <section id="team" class="reveal" role="region" aria-labelledby="team-title">
+    <div class="container">
+      <h2 id="team-title" class="section-title">Our Team</h2>
+
+      <h3 class="subhead team-section-title">Board of Directors</h3>
+      <div class="cards chairman-cards" id="chairmanCard"></div>
+      <div class="cards board-cards" id="boardCards"></div>
+
+      <h2 id="coreteam2026-title" class="section-title">Executive Committee - 2026</h2>
+      <div class="cards" id="coreTeam2026Cards" aria-label="Core Team 2026"></div>
+
+
+    </div>
+  </section>
+
+  <!-- ===== Events ===== -->
+  <section id="events" class="reveal" role="region" aria-labelledby="events-title">
+    <div class="container">
+      <h2 id="events-title" class="section-title">Events</h2>
+      <div class="events-3col">
+        <div class="col l">
+          <h3 class="subhead">Past Events</h3>
+          <div class="vloop vloop--past" id="pastVLoop"></div>
+        </div>
+        <div class="col m">
+          <h3 class="subhead">Calendar</h3>
+          <div class="calendar-card">
+            <div class="calendar-head">
+              <strong>Mini Calendar</strong>
+              <span class="pill" id="calendarMonth"></span>
+            </div>
+            <div class="calendar-grid" id="calendarGrid" aria-label="Mini Calendar"></div>
+            <div class="schedule" id="upcomingSchedule" aria-label="Upcoming schedule"></div>
+          </div>
+        </div>
+        <div class="col r">
+          <h3 class="subhead">Upcoming Events</h3>
+          <div class="vloop vloop--upcoming" id="upVLoop"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Core Team 2026 ===== -->
+  <section id="coreteam2026" class="reveal" role="region" aria-labelledby="coreteam2026-title">
+    <div class="container">
+
+      <h3 class="subhead team-section-title">Executive Committee - 2025</h3>
+      <div class="cards" id="coreCards"></div>
+
+    </div>
+  </section>
+
+
+
+
+  <div id="footer-placeholder"></div>
+  <script src="script.js"></script>
+</body>
+
+</html>

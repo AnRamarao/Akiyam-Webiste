@@ -1,44 +1,378 @@
 [
     {
-        "name": "Menifee Motors",
-        "cat": "Services",
-        "logo": "assets/vendors/menifee-motors.jpg",
-        "url": "#",
-        "blurb": "Trusted local auto care & sponsors."
+        "Category": "Appliances",
+        "Sub-Category": "Appliances",
+        "Vendor Name": "Joseph Turney",
+        "Vendor Phone": "(951) 378-5127",
+        "Referred By": "Parama The Lakes",
+        "Referral Comment about Vendor": ""
     },
     {
-        "name": "Spice Route Kitchen",
-        "cat": "Food",
-        "logo": "assets/vendors/spice-route.jpg",
-        "url": "#",
-        "blurb": "Homestyle Indian meals & catering."
+        "Category": "Appliances",
+        "Sub-Category": "Water Softener",
+        "Vendor Name": "Carlos",
+        "Vendor Phone": "(909) 993-2989",
+        "Referred By": "Phani",
+        "Referral Comment about Vendor": "$1800 Salt based and Carbon (Extra $400 for carbon based)"
     },
     {
-        "name": "Little Learners Academy",
-        "cat": "Education",
-        "logo": "assets/vendors/learners.jpg",
-        "url": "#",
-        "blurb": "After-school & tutoring programs."
+        "Category": "Automobile",
+        "Sub-Category": "Auto repair",
+        "Vendor Name": "Temecula Accurate Auto repair",
+        "Vendor Phone": "",
+        "Referred By": "Shoaib",
+        "Referral Comment about Vendor": ""
     },
     {
-        "name": "Saree & Shine Boutique",
-        "cat": "Boutique",
-        "logo": "assets/vendors/saree-shine.jpg",
-        "url": "#",
-        "blurb": "Ethnic wear, jewelry & gifts."
+        "Category": "Automobile",
+        "Sub-Category": "Auto repair",
+        "Vendor Name": "Faadi",
+        "Vendor Phone": "(619) 779-4977",
+        "Referred By": "Shoaib",
+        "Referral Comment about Vendor": "He did a great job on my 2011 Mazda, besides great work, he also charged really reasonable. Saved around couple of hundred dollars."
     },
     {
-        "name": "Chai Junction",
-        "cat": "Food",
-        "logo": "assets/vendors/chai-junction.jpg",
-        "url": "#",
-        "blurb": "Masala chai, snacks & sweets."
+        "Category": "Automobile",
+        "Sub-Category": "Auto repair",
+        "Vendor Name": "Jaime",
+        "Vendor Phone": "(951) 323-1209",
+        "Referred By": "Ramarao",
+        "Referral Comment about Vendor": "Car repairs are done at home. Very reliable person with personal experience from multiple people in this group"
     },
     {
-        "name": "Heritage Lake Realty",
-        "cat": "Services",
-        "logo": "assets/vendors/heritage-realty.jpg",
-        "url": "#",
-        "blurb": "Neighborhood real estate experts."
+        "Category": "Beauty",
+        "Sub-Category": "Beauty",
+        "Vendor Name": "Joaen",
+        "Vendor Phone": "(714) 452 7409",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Eyebrow Threading, All Wax Services, Henna, Facial, Hair Style"
+    },
+    {
+        "Category": "Beauty",
+        "Sub-Category": "Personal Grooming",
+        "Vendor Name": "Lata - Heena Artist",
+        "Vendor Phone": "(262) 613-3085",
+        "Referred By": "",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Catering",
+        "Sub-Category": "Food",
+        "Vendor Name": "Reema- Homemade Indian sweets",
+        "Vendor Phone": "(657) 262-8329",
+        "Referred By": "",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Catering",
+        "Sub-Category": "Food",
+        "Vendor Name": "Swathi- Customized cakes",
+        "Vendor Phone": "(858) 397-3574",
+        "Referred By": "",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Catering",
+        "Sub-Category": "Food",
+        "Vendor Name": "Shri Home Foods Menifee",
+        "Vendor Phone": "(909) 380-3080 & (626) 206-7072",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Sumana and Kanthi. Sweet and Spicy foods"
+    },
+    {
+        "Category": "Catering",
+        "Sub-Category": "Food",
+        "Vendor Name": "Indi Services",
+        "Vendor Phone": "(951) 223-3778 & (424) 347-4494",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Thanks to Divya garu and Chaitanya."
+    },
+    {
+        "Category": "Catering",
+        "Sub-Category": "Food",
+        "Vendor Name": "Mana Inti Ruchulu",
+        "Vendor Phone": "(619) 458-1415",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Hey everyone! Just wanted to share something close to my heart \u2014 my mom has started her own small business for the very first timeShe\u2019s making super authentic and tasty non-veg pickles \u2014 full of flavor and made at home. "
+    },
+    {
+        "Category": "Catering",
+        "Sub-Category": "Food",
+        "Vendor Name": "Andhra food catering services",
+        "Vendor Phone": "213-321-6875",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Andhra Style"
+    },
+    {
+        "Category": "Construction",
+        "Sub-Category": "Concrete",
+        "Vendor Name": "Vea",
+        "Vendor Phone": "(951) 519-4139",
+        "Referred By": "Kalyan",
+        "Referral Comment about Vendor": "So also Priya/Kalya gave me a very nice reference for artificial turf work . His name is Vea , charged me around 3200 for laying artificial turf in my front yard and was based on material charges per sq ft plus labor and weed suppressor etc. Vea told me he does a lot of work for Indian families."
+    },
+    {
+        "Category": "Construction",
+        "Sub-Category": "Concrete",
+        "Vendor Name": "Saul",
+        "Vendor Phone": "(714) 679-5063",
+        "Referred By": "Manish",
+        "Referral Comment about Vendor": "Their pricing is around $7.5 per square foot. Our design incorporates rain drains, concrete (design with turf in the middle), retaining walls for planters, and provision for electricity in the sitting area."
+    },
+    {
+        "Category": "Construction",
+        "Sub-Category": "Concrete",
+        "Vendor Name": "Manny Sr",
+        "Vendor Phone": "951-963-6511",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Un Licensed. Before contact him let me know. I can bargain for $5 per sqft concrete work or Turf"
+    },
+    {
+        "Category": "Electrical",
+        "Sub-Category": "Electrical",
+        "Vendor Name": "Mehdi",
+        "Vendor Phone": "858-829-3098",
+        "Referred By": "Varma",
+        "Referral Comment about Vendor": "Recently got a major upgrade done from him. He is excellent and charges are very reasonable - For example he charges $85 for installing each recessed light including all materials and labor compared to closet quote I got was for $125."
+    },
+    {
+        "Category": "Electrical",
+        "Sub-Category": "Electrical",
+        "Vendor Name": "Leo",
+        "Vendor Phone": "951-992-0957",
+        "Referred By": "Dheeraj",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Electrical",
+        "Sub-Category": "Electrical",
+        "Vendor Name": "John and Ana",
+        "Vendor Phone": "626-537-6343",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Refer Bala from Lake Elsinore they know me"
+    },
+    {
+        "Category": "Events",
+        "Sub-Category": "Decor and Rentals",
+        "Vendor Name": "Krithiya",
+        "Vendor Phone": "312-439-3137",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "https://www.instagram.com/create2celebrate2024/"
+    },
+    {
+        "Category": "Events",
+        "Sub-Category": "Photography",
+        "Vendor Name": "Chandra Devavarapu",
+        "Vendor Phone": "216-258-4852",
+        "Referred By": "Vittal",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Events",
+        "Sub-Category": "Photography",
+        "Vendor Name": "Arsha Photography",
+        "Vendor Phone": "714-316-8586",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Local from Menifee"
+    },
+    {
+        "Category": "Events",
+        "Sub-Category": "Photography",
+        "Vendor Name": "Satya Vani",
+        "Vendor Phone": "(949) 421-9427",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Coldwell Banker Associated Brokers Realty"
+    },
+    {
+        "Category": "Financial",
+        "Sub-Category": "Financial",
+        "Vendor Name": "Ramani Kethireddy",
+        "Vendor Phone": "951-582-1366",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "Estate Planning. Will and Trust, College Savings and Investments Annuties and Retirement and Long term care, Business Opportunities"
+    },
+    {
+        "Category": "Financial",
+        "Sub-Category": "Insurance",
+        "Vendor Name": "Kal Patel",
+        "Vendor Phone": "408-506-7581",
+        "Referred By": "Meera",
+        "Referral Comment about Vendor": "Does life insurance, investments, retirement planning, annuities & Medicare"
+    },
+    {
+        "Category": "Financial",
+        "Sub-Category": "Realtor",
+        "Vendor Name": "Zahid Zen -Property Manager/Realtor",
+        "Vendor Phone": "760-884-9100",
+        "Referred By": "Community member, referred by many.",
+        "Referral Comment about Vendor": "Buy, Sell and Property Management services"
+    },
+    {
+        "Category": "Financial",
+        "Sub-Category": "Realtor",
+        "Vendor Name": "Vibin Jose",
+        "Vendor Phone": "951-848-1832",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Gardening",
+        "Sub-Category": "Gardening",
+        "Vendor Name": "Sergio",
+        "Vendor Phone": "(951) 239-5699",
+        "Referred By": "Rekha",
+        "Referral Comment about Vendor": "sergio charged me per work , 100$ for all my weed plant removal and other shrubs trimming. This is far reasonable than a different guy who took double thr charges last year."
+    },
+    {
+        "Category": "Gardening",
+        "Sub-Category": "Gardening",
+        "Vendor Name": "Sordy",
+        "Vendor Phone": "951-306-7926",
+        "Referred By": "Shiva",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Gardening",
+        "Sub-Category": "Gardening",
+        "Vendor Name": "Alva Nazario",
+        "Vendor Phone": "951-972-6754",
+        "Referred By": "Shri",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Gardening",
+        "Sub-Category": "Gardening",
+        "Vendor Name": "Fermin",
+        "Vendor Phone": "951-415-1788",
+        "Referred By": "Guna and multiple group members",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Gardening",
+        "Sub-Category": "Gardening",
+        "Vendor Name": "Leo Miya - Sprinkler system and artificial grass",
+        "Vendor Phone": "760-445-4022",
+        "Referred By": "Meera",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Gardening",
+        "Sub-Category": "Landscaping",
+        "Vendor Name": "Vea",
+        "Vendor Phone": "951-519-4139",
+        "Referred By": "Ramarao",
+        "Referral Comment about Vendor": "Concrete, Lawn, Artificial Truf etc."
+    },
+    {
+        "Category": "Gardening",
+        "Sub-Category": "Tree Trimming",
+        "Vendor Name": "Pancho tree services",
+        "Vendor Phone": "951-783-6106",
+        "Referred By": "Senthil",
+        "Referral Comment about Vendor": "Did an excellent job on my palm trees and backyard cleanup. Very reasonable price."
+    },
+    {
+        "Category": "General",
+        "Sub-Category": "Fencing",
+        "Vendor Name": "Surefire Fence",
+        "Vendor Phone": "951-259-6347",
+        "Referred By": "OmPrakash",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "General",
+        "Sub-Category": "Garage Door",
+        "Vendor Name": "Scott Garage Repair",
+        "Vendor Phone": "951-238-9630",
+        "Referred By": "Multiple",
+        "Referral Comment about Vendor": "Fair price and gave an appointment quick. Good reviews"
+    },
+    {
+        "Category": "General",
+        "Sub-Category": "Handyman",
+        "Vendor Name": "Rusty",
+        "Vendor Phone": "630-632-6335",
+        "Referred By": "Shivad",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "General",
+        "Sub-Category": "House Cleaning",
+        "Vendor Name": "Cherise",
+        "Vendor Phone": "(951) 418-6052",
+        "Referred By": "Rekha",
+        "Referral Comment about Vendor": "Cherise has been doing mine for a year. She takes a lot of time so give her a good 5 hours as she does the entire house on her own. But she does a great job. (Incase you need to contact her) she prefers Menifee area."
+    },
+    {
+        "Category": "General",
+        "Sub-Category": "House Cleaning",
+        "Vendor Name": "Heather (https://hcscleaningpros.com/)",
+        "Vendor Phone": "951-392-8105",
+        "Referred By": "Dheeraj",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "General",
+        "Sub-Category": "Movers",
+        "Vendor Name": "Julio www.123moving.biz",
+        "Vendor Phone": "760-522-7228",
+        "Referred By": "Govardhan",
+        "Referral Comment about Vendor": "Fair price, good work, patient, and flexible"
+    },
+    {
+        "Category": "General",
+        "Sub-Category": "Pest",
+        "Vendor Name": "For Pest Control - 1) Home Pest 2) Home guard",
+        "Vendor Phone": "",
+        "Referred By": "Binoy",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Groceries",
+        "Sub-Category": "Groceries",
+        "Vendor Name": "Farm fresh Olive Oil",
+        "Vendor Phone": "949-344-5340",
+        "Referred By": "",
+        "Referral Comment about Vendor": "Refer to Graphic Ads sheet"
+    },
+    {
+        "Category": "Insurance",
+        "Sub-Category": "Insurance",
+        "Vendor Name": "Rancho California Medical Group",
+        "Vendor Phone": "",
+        "Referred By": "Multiple",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Kids",
+        "Sub-Category": "Preschool / Daycare",
+        "Vendor Name": "LittleStarsChildcare ( Deepa )",
+        "Vendor Phone": "858-226-3692",
+        "Referred By": "Baskara",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "General",
+        "Sub-Category": "Painting",
+        "Vendor Name": "David",
+        "Vendor Phone": "951-870-9991",
+        "Referred By": "Vamsi",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Travel",
+        "Sub-Category": "Ride",
+        "Vendor Name": "For Airport Rides - Omair",
+        "Vendor Phone": "619-414-0366",
+        "Referred By": "",
+        "Referral Comment about Vendor": ""
+    },
+    {
+        "Category": "Travel",
+        "Sub-Category": "Travel",
+        "Vendor Name": "Joaen",
+        "Vendor Phone": "(714) 452 7409",
+        "Referred By": "Bala",
+        "Referral Comment about Vendor": "International travel"
     }
 ]

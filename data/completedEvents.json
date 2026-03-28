@@ -1,26 +1,79 @@
 [
   {
-    "id": "past_pongal",
-    "title": "Pongal Festival",
+    "id": "1",
+    "title": "Sankranthi",
     "date": "2025-01-18",
-    "img": "assets/events/past-pongal.jpg",
-    "fallback": "https://images.unsplash.com/photo-1542367597-8849eb00b2c2?q=80&w=1200&auto=format&fit=crop",
+    "img": "assets/gallery/migrated/Sankranthi.jpeg",
     "summary": "Harvest celebrations with traditional food & festivities."
   },
   {
-    "id": "past_ugadhi",
+    "id": "2",
     "title": "Ugadhi",
     "date": "2025-03-30",
-    "img": "assets/events/past-ugadi.jpg",
-    "fallback": "https://images.unsplash.com/photo-1578926374377-5a3f78c19c6f?q=80&w=1200&auto=format&fit=crop",
+    "img": "assets/gallery/migrated/Ugadhi.jpeg",
     "summary": "Telugu New Year with joy, culture, tradition."
   },
   {
-    "id": "past_independence",
-    "title": "Independence Day Celebration",
+    "id": "3",
+    "title": "Volleyball Tournament",
+    "date": "2025-09-23",
+    "img": "assets/gallery/migrated/2025_VolleyBall.jpeg",
+    "summary": "Sports spirit."
+  },
+  {
+    "id": "4",
+    "title": "Multi Cultural Event",
     "date": "2025-08-15",
-    "img": "assets/events/past-independence.jpg",
-    "fallback": "https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=1200&auto=format&fit=crop",
-    "summary": "Pride, parade, and community spirit."
+    "img": "assets/gallery/migrated/Multicultural.jpeg",
+    "summary": "Sports spirit."
+  },
+  {
+    "id": "5",
+    "title": "Women's Day",
+    "date": "2025-04-11",
+    "img": "assets/gallery/migrated/WomenDay.jpeg",
+    "summary": "Celebrating women with recognition and community inspiration."
+  },
+  {
+    "id": "6",
+    "title": "Pickleball Q1",
+    "date": "2025-04-13",
+    "img": "assets/gallery/migrated/PickleBallQ1.jpeg",
+    "summary": "Quarter 1 pickleball meetup fostering active lifestyles."
+  },
+  {
+    "id": "7",
+    "title": "Pickleball Q2",
+    "date": "2025-06-01",
+    "img": "assets/gallery/migrated/PickleBallQ2.jpeg",
+    "summary": "Quarter 2 pickleball community tournament."
+  },
+  {
+    "id": "8",
+    "title": "Father's Day",
+    "date": "2025-06-15",
+    "img": "assets/gallery/migrated/FathersDay.jpeg",
+    "summary": "Honoring fathers with family activities and gratitude."
+  },
+  {
+    "id": "9",
+    "title": "Independence Day",
+    "date": "2025-08-15",
+    "img": "assets/gallery/migrated/IndependenceDay.jpeg",
+    "summary": "Patriotic celebrations and cultural pride."
+  },
+  {
+    "id": "10",
+    "title": "Pickleball Q3",
+    "date": "2025-10-11",
+    "img": "assets/gallery/migrated/202508_Pickleball.jpeg",
+    "summary": "Quarter 3 pickleball matches and community bonding."
+  },
+  {
+    "id": "11",
+    "title": "Volleyball Tournament",
+    "date": "2025-10-25",
+    "img": "assets/gallery/migrated/Volleyball.jpeg",
+    "summary": "Competitive volleyball bringing teams together."
   }
 ]

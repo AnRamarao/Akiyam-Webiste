@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AIKYAM Diwali Celebration - Festival of Lights | California</title>
+  <meta name="description" content="Join AIKYAM for cultural celebrations, family events, and community volunteering. Bringing families together through festivals, kids showcases, and community engagement in California." />
+  <meta name="keywords" content="AIKYAM, community events, cultural celebrations, family activities, volunteering, festivals, California, Indian community, cultural pride, kids showcase" />
+  <meta name="author" content="AIKYAM" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AIKYAM - Community Events & Cultural Celebrations" />
+  <meta property="og:description" content="Join AIKYAM for cultural celebrations, family events, and community volunteering in California." />
+  <meta property="og:image" content="assets/branding/logo.png" />
+  <meta property="og:url" content="https://aikyamusa.org/" />
+
+  <link rel="canonical" href="https://aikyamusa.org/" />
+  <link rel="icon" type="image/png" href="assets/branding/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background" loading="eager">
+  </div>
+
+  <!-- Standalone Header (Launch Page Only) -->
+  <header class="reveal" id="siteHeader" data-launch-header>
+    <div class="header-inner">
+      <div>
+        <div class="sunburst" aria-hidden="true" style="width:80px;height:80px;">
+          <div class="sweep"></div>
+        </div>
+        <div class="hero-logo-wrap" id="heroWrap" style="margin: 3px;">
+          <img class="hero-logo" id="heroLogo" src="assets/branding/logo.png" alt="AIKYAM Logo"
+            style="width:70px;height:70px;">
+        </div>
+      </div>
+      <nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links">
+          <a href="index.html#home" data-launch-home>Home</a>
+          <a href="index.html#team">Team</a>
+          <!-- Direct to main site sections not present on launch -->
+          <a href="index.html#events">Events</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="vendors.html">Vendors</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+      <button class="theme-toggle" id="themeToggle"> ☀/🌙</button>
+    </div>
+  </header>
+  <div id="scroll-progress"></div>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="home" role="banner">
+    <div class="container">
+      <div class="hero-left">
+        <!-- Mission & Vision clean text -->
+        <div class="mission-vision">
+          <h4>Mission</h4>
+          <p>To inspire and empower the next generation by nurturing cultural pride, fostering community unity, and
+          creating opportunities for children and families to celebrate, learn, and grow together.</p>
+
+          <h4>Vision</h4>
+          <p>A vibrant, inclusive home where every family belongs, every child leads with pride, and our diversity
+          strengthens the city we love.</p>
+        </div>
+
+
+        <div class="cta-row">
+          <a class="btn btn--primary" href="#events" aria-label="Navigate to events section">See Events</a>
+          <a class="btn btn--secondary" href="join.html" aria-label="Join AIKYAM community">Join Us</a>
+          <a class="btn btn--secondary" target="_blank" rel="noopener" href="https://www.youtube.com/@ManaAIKYAM" aria-label="Visit AIKYAM YouTube channel (opens in new tab)">YouTube</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="sunburst" aria-hidden="true">
+          <div class="sweep"></div>
+        </div>
+        <div class="hero-logo-wrap">
+          <img class="hero-logo" src="assets/branding/logo.png" alt="AIKYAM hero image" loading="eager">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Team ===== -->
+  <section id="team" class="reveal" role="region" aria-labelledby="team-title">
+    <div class="container">
+      <h2 id="team-title" class="section-title">Our Team</h2>
+
+      <h3 class="subhead team-section-title">Board of Directors</h3>
+      <div class="cards chairman-cards" id="chairmanCard"></div>
+      <div class="cards board-cards" id="boardCards"></div>
+
+      <h3 class="subhead team-section-title">Core Team</h3>
+      <div class="cards" id="coreCards"></div>
+    </div>
+  </section>
+
+  <!-- Diwali Fireworks Overlay -->
+  <div id="fireworks-overlay" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
+    <div class="fireworks-controls">
+      <div style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
+        <button id="mute-btn" class="skip-button" style="background: rgba(255, 255, 255, 0.15); min-width: 50px;">🔊</button>
+        <button id="test-btn" class="skip-button" style="background: rgba(255, 255, 255, 0.15);">🎆 Test</button>
+        <button id="skip-btn" class="skip-button">Continue to Website</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Fireworks audio removed: now using synthesized oscillator beeps only -->
+  <canvas id="fireworks-canvas"></canvas>
+  <div id="toTop" title="Back to top">↑</div>
+  <div id="toast"></div>
+
+  <div id="footer-placeholder"></div>
+  <script src="script.js"></script>
+  
+  <!-- Diwali Fireworks Script -->
+  <style>
+    /* Fireworks Overlay */
+    #fireworks-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(3px);
+      animation: overlayFadeIn 0.8s ease-out;
+      /* Allow underlying page buttons (nav, CTA) to remain clickable */
+      pointer-events: none;
+    }
+    #fireworks-overlay::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      background-image: url('assets/branding/logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.4;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      animation: logoGlow 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes logoGlow {
+      0% { 
+        opacity: 0.35;
+        filter: drop-shadow(0 0 40px rgba(255, 204, 0, 0.8)) brightness(1.3);
+      }
+      100% { 
+        opacity: 0.45;
+        filter: drop-shadow(0 0 80px rgba(255, 204, 0, 1.0)) brightness(1.6);
+      }
+    }
+    
+    #fireworks-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100050; /* keep particles below logo */
+      background: transparent;
+    }
+    
+    /* Large background logo during fireworks */
+    .fireworks-bg-logo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: min(55vw, 55vh);
+      height: min(55vw, 55vh);
+      background-image: url('assets/branding/logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.5;
+      transform: translate(-50%, -50%);
+      z-index: 100090; /* ensure above canvas */
+      animation: fireworksLogoGlow 3s ease-in-out infinite alternate;
+      filter: brightness(1.8) contrast(1.5) saturate(1.4);
+      pointer-events: none;
+    }
+    
+    @keyframes fireworksLogoGlow {
+      0% { 
+        opacity: 0.45;
+        transform: translate(-50%, -50%) scale(0.98);
+        filter: brightness(1.6) contrast(1.4) saturate(1.3) drop-shadow(0 0 60px rgba(255, 204, 0, 0.9));
+      }
+      100% { 
+        opacity: 0.55;
+        transform: translate(-50%, -50%) scale(1.02);
+        filter: brightness(2.0) contrast(1.6) saturate(1.5) drop-shadow(0 0 120px rgba(255, 204, 0, 1.2));
+      }
+    }
+    
+    .fireworks-controls {
+      position: relative;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1.5rem 2rem;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      z-index: 100002;
+      /* Restore interaction inside controls while overlay is non-interactive */
+      pointer-events: auto;
+    }
+    
+    .diwali-welcome {
+      position: relative;
+      background: linear-gradient(135deg, #ff6b35, #f7931e, #ffcc00);
+      color: white;
+      padding: 3rem 4rem;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      z-index: 100001;
+      animation: diwaliGlow 2s ease-in-out infinite alternate, welcomeZoom 1s ease-out;
+      font-family: 'Montserrat', sans-serif;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      max-width: 90%;
+    }
+    
+    @keyframes overlayFadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    @keyframes welcomeZoom {
+      0% { transform: scale(0.5); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes diwaliGlow {
+      0% { box-shadow: 0 20px 40px rgba(255, 107, 53, 0.4), 0 0 30px rgba(255, 204, 0, 0.6); }
+      100% { box-shadow: 0 25px 50px rgba(255, 107, 53, 0.6), 0 0 50px rgba(255, 204, 0, 0.8); }
+    }
+    
+    .diwali-welcome h2 {
+      margin: 0 0 1rem 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-weight: 900;
+    }
+    
+    .diwali-welcome p {
+      margin: 0 0 1rem 0;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      opacity: 0.95;
+      font-weight: 600;
+    }
+    
+    .skip-button {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+    
+    .skip-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    @keyframes overlayFadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+  </style>
+  
+  <script>
+    // Diwali Fireworks Animation
+    class DiwaliFireworks {
+      constructor() {
+        this.canvas = document.getElementById('fireworks-canvas');
+        if (!this.canvas) return;
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.fireworks = [];
+        this.colors = ['#ff6b35', '#f7931e', '#ffcc00', '#ff1744', '#e91e63', '#9c27b0', '#3f51b5', '#2196f3', '#4caf50', '#ff9800'];
+        // Performance / speed tuning constants (can override via window before start)
+        this.ROCKET_CHANCE = window.FIREWORKS_ROCKET_CHANCE || 0.30; // probability per frame
+        this.ROCKET_SPEED_MIN = window.FIREWORKS_ROCKET_SPEED_MIN || 5;
+        this.ROCKET_SPEED_VAR = window.FIREWORKS_ROCKET_SPEED_VAR || 3; // added to min
+        this.PARTICLE_BASE = window.FIREWORKS_PARTICLE_BASE || 55; // base particle count
+        this.PARTICLE_VAR = window.FIREWORKS_PARTICLE_VAR || 35; // random additional particles
+        this.PARTICLE_VEL_MIN = window.FIREWORKS_PARTICLE_VEL_MIN || 3;
+        this.PARTICLE_VEL_VAR = window.FIREWORKS_PARTICLE_VEL_VAR || 5; // velocity added to min
+        this.PARTICLE_DECAY_MIN = window.FIREWORKS_PARTICLE_DECAY_MIN || 0.02; // faster fade
+        this.PARTICLE_DECAY_VAR = window.FIREWORKS_PARTICLE_DECAY_VAR || 0.01;
+        this.audioCtx = null;
+        this.fireworkBuffer = null;
+        this.backgroundSource = null;
+        this.soundEnabled = true; // user can mute
+        this.isPlaying = false;
+        this.overlay = null;
+        this.autoStopTimeout = null;
+        this.backgroundLogo = null;
+        Object.assign(this.canvas.style, { display: 'block', position: 'fixed', top: '0', left: '0', pointerEvents: 'none', zIndex: '100002', background: 'transparent' });
+        this.resizeCanvas();
+        window.addEventListener('resize', () => this.resizeCanvas());
+        this.preloadAudio();
+      }
+
+      // Audio preload disabled (MP3 removed). Visuals run regardless.
+      preloadAudio() { /* no-op */ }
+      
+      resizeCanvas() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        // Clear the canvas after resize
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+      
+      createFirework(x, y) {
+        const particleCount = this.PARTICLE_BASE + Math.random() * this.PARTICLE_VAR;
+        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        
+        // Play burst sound immediately when firework explodes
+        this.playBurstSound();
+        
+        for (let i = 0; i < particleCount; i++) {
+          const angle = (Math.PI * 2 * i) / particleCount;
+          const velocity = this.PARTICLE_VEL_MIN + Math.random() * this.PARTICLE_VEL_VAR;
+          
+          this.particles.push({
+            x: x,
+            y: y,
+            vx: Math.cos(angle) * velocity,
+            vy: Math.sin(angle) * velocity,
+            life: 1,
+            decay: this.PARTICLE_DECAY_MIN + Math.random() * this.PARTICLE_DECAY_VAR,
+            color: color,
+            size: 2 + Math.random() * 3
+          });
+        }
+        
+      }
+      
+      createRocket() {
+        const x = Math.random() * this.canvas.width;
+        const targetY = 100 + Math.random() * 200;
+        
+        // Play launch sound immediately when rocket is created
+        this.playLaunchSound();
+        
+        this.fireworks.push({
+          x: x,
+          y: this.canvas.height,
+          targetY: targetY,
+          speed: this.ROCKET_SPEED_MIN + Math.random() * this.ROCKET_SPEED_VAR,
+          color: '#ffcc00'
+        });
+        
+      }
+      
+      update() {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Update rockets
+        for (let i = this.fireworks.length - 1; i >= 0; i--) {
+          const rocket = this.fireworks[i];
+          rocket.y -= rocket.speed;
+          
+          // Draw rocket trail
+          this.ctx.beginPath();
+          this.ctx.arc(rocket.x, rocket.y, 2, 0, Math.PI * 2);
+          this.ctx.fillStyle = rocket.color;
+          this.ctx.fill();
+          
+          if (rocket.y <= rocket.targetY) {
+            this.createFirework(rocket.x, rocket.y);
+            this.fireworks.splice(i, 1);
+          }
+        }
+        
+        // Update particles
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const particle = this.particles[i];
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          particle.vy += 0.1; // gravity
+          particle.life -= particle.decay;
+          
+          if (particle.life <= 0) {
+            this.particles.splice(i, 1);
+            continue;
+          }
+          
+          // Draw particle
+          this.ctx.save();
+          this.ctx.globalAlpha = particle.life;
+          this.ctx.beginPath();
+          this.ctx.arc(particle.x, particle.y, particle.size * particle.life, 0, Math.PI * 2);
+          this.ctx.fillStyle = particle.color;
+          this.ctx.fill();
+          this.ctx.restore();
+        }
+      }
+      
+      playBurstSound() {
+        if (!this.soundEnabled || !this.audioCtx) return;
+        this.playAlternativeSound();
+      }
+      
+      playLaunchSound() {
+        if (!this.soundEnabled || !this.audioCtx) return;
+        this.playAlternativeSound();
+      }
+      
+      start() {
+        if (this.isPlaying) return;
+        this.isPlaying = true;
+        
+        // Ensure canvas is properly configured
+        this.canvas.style.display = 'block';
+        this.resizeCanvas();
+        
+        // Clear canvas with transparent background
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Get overlay element
+        this.overlay = document.getElementById('fireworks-overlay');
+        if (!this.overlay) {
+          console.error('Fireworks overlay not found!');
+          return;
+        }
+        
+        // Show overlay
+        this.overlay.style.display = 'flex';
+        setTimeout(() => {
+          this.overlay.style.opacity = '1';
+        }, 100);
+        
+        // Add background logo
+        this.createBackgroundLogo();
+        
+        // Setup skip button with user interaction for audio
+        const skipBtn = document.getElementById('skip-btn');
+        if (skipBtn) {
+          const skipHandler = () => this.stop();
+          skipBtn.removeEventListener('click', skipHandler); // Remove any existing listeners
+          skipBtn.addEventListener('click', skipHandler);
+          
+          // Enable audio on first user interaction
+          skipBtn.addEventListener('click', () => {
+            this.enableAudioContext();
+          }, { once: true });
+        }
+        
+        // Setup mute button with user interaction for audio
+        const muteBtn = document.getElementById('mute-btn');
+        if (muteBtn) {
+          const muteHandler = () => {
+            this.enableAudioContext(); // Enable audio context first
+            this.soundEnabled = !this.soundEnabled;
+            muteBtn.textContent = this.soundEnabled ? '🔊' : '🔇';
+            
+            // Stop background sound if muted
+            if (!this.soundEnabled && this.backgroundSound) {
+              try {
+                this.backgroundSound.pause();
+                this.backgroundSound.currentTime = 0;
+                this.backgroundSound = null;
+              } catch (e) {
+                console.log('Error stopping background sound');
+              }
+            } else if (this.soundEnabled && !this.backgroundSound) {
+              this.startBackgroundSound();
+            }
+          };
+          muteBtn.removeEventListener('click', muteHandler);
+          muteBtn.addEventListener('click', muteHandler);
+          
+          // Enable audio on first interaction
+          muteBtn.addEventListener('click', () => {
+            this.enableAudioContext();
+          }, { once: true });
+        }
+        
+        // Setup test button for manual fireworks
+        const testBtn = document.getElementById('test-btn');
+        if (testBtn) {
+          testBtn.addEventListener('click', () => {
+            console.log('Manual test firework triggered');
+            this.enableAudioContext();
+            
+            // Test audio directly
+            this.createRocket();
+          });
+        }
+        
+        // Auto-stop after 10 seconds
+        this.autoStopTimeout = setTimeout(() => this.stop(), window.FIREWORKS_DURATION || 10000);
+        
+        // Start fireworks show immediately
+        this.animate();
+        
+        // Ambient background sound removed
+        
+        // Create initial burst of fireworks with delay
+        console.log('Starting initial fireworks burst...');
+        setTimeout(() => {
+          this.createRocket();
+          console.log('First rocket created');
+        }, 500);
+        setTimeout(() => {
+          this.createRocket();
+          console.log('Second rocket created');
+        }, 1000);
+        setTimeout(() => {
+          this.createRocket();
+          console.log('Third rocket created');
+        }, 1500);
+      }
+      
+      enableAudioContext() {
+        if (!this.audioCtx) {
+          try { this.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return; }
+        }
+        if (this.audioCtx.state === 'suspended') {
+          this.audioCtx.resume();
+        }
+      }
+      
+      animate() {
+        if (!this.isPlaying) {
+          console.log('Animation stopped');
+          return;
+        }
+        
+        this.update();
+        
+        // Create new rockets randomly
+        // Increase chance of rocket creation for faster show
+        if (Math.random() < this.ROCKET_CHANCE) {
+          this.createRocket();
+          // Occasionally spawn a second rocket to intensify
+          if (Math.random() < 0.25) this.createRocket();
+        }
+        
+        requestAnimationFrame(() => this.animate());
+      }
+      
+      createBackgroundLogo() {
+        // Create and add the background logo element
+        if (!this.backgroundLogo) {
+          this.backgroundLogo = document.createElement('div');
+          this.backgroundLogo.className = 'fireworks-bg-logo';
+          this.backgroundLogo.id = 'fireworks-bg-logo';
+          this.backgroundLogo.style.display = 'block';
+          this.backgroundLogo.style.visibility = 'visible';
+          document.body.appendChild(this.backgroundLogo);
+          
+          // Force a reflow to ensure the element is properly rendered
+          this.backgroundLogo.offsetHeight;
+          
+          console.log('Background logo created and added to DOM');
+        }
+      }
+      
+      removeBackgroundLogo() {
+        // Remove the background logo element
+        if (this.backgroundLogo && this.backgroundLogo.parentNode) {
+          this.backgroundLogo.parentNode.removeChild(this.backgroundLogo);
+          this.backgroundLogo = null;
+        }
+      }
+      
+      playAlternativeSound() {
+        if (!this.audioCtx) return;
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(700, this.audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(180, this.audioCtx.currentTime + 0.35);
+        gain.gain.value = 0.15;
+        osc.connect(gain).connect(this.audioCtx.destination);
+        osc.start();
+        osc.stop(this.audioCtx.currentTime + 0.35);
+      }
+      
+      startBackgroundSound() { /* removed */ }
+      
+      stop() {
+        this.isPlaying = false;
+        this.particles = [];
+        this.fireworks = [];
+        // No persistent background audio to stop
+        
+        // Remove background logo
+        this.removeBackgroundLogo();
+        
+        // Clear canvas completely
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        if (this.autoStopTimeout) {
+          clearTimeout(this.autoStopTimeout);
+          this.autoStopTimeout = null;
+        }
+        
+        // Hide overlay with fade then redirect
+        if (this.overlay) {
+          this.overlay.style.opacity = '0';
+          setTimeout(() => {
+            this.overlay.style.display = 'none';
+            // Redirect to homepage after fireworks end (replace so user doesn't go back to fireworks page)
+            window.location.replace('index.html');
+          }, 500);
+        } else {
+          window.location.replace('index.html');
+        }
+
+        // Reset canvas display for completeness
+        this.canvas.style.display = 'block';
+        this.overlay = null;
+      }
+      
+    // Remove the old showWelcomeMessage method since we're using the overlay
+    }
+
+    // Global fireworks instance
+    let fireworksInstance = null;
+    
+    function startFireworksShow() {
+      console.log('Starting fireworks show...');
+      
+      // Reset any existing instance
+      if (fireworksInstance) {
+        fireworksInstance.stop();
+      }
+      
+      // Create new instance and start
+      fireworksInstance = new DiwaliFireworks();
+      if (fireworksInstance.canvas && fireworksInstance.ctx) {
+        fireworksInstance.start();
+        console.log('Fireworks started successfully!');
+      } else {
+        console.error('Failed to initialize fireworks - canvas or context not available');
+      }
+    }
+    
+    // Initialize when DOM is ready
+    // Global duration constant (milliseconds) for easy tuning
+    window.FIREWORKS_DURATION = 10000; // 10 seconds total run time
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded; starting fireworks immediately for 10s duration');
+      startFireworksShow();
+    });
+    
+    // Restart on page visibility change (handles refresh scenarios)
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden && fireworksInstance && !fireworksInstance.isPlaying) {
+        setTimeout(() => {
+          startFireworksShow();
+        }, 1000);
+      }
+    });
+    
+    // Manual trigger for testing
+    window.startFireworks = startFireworksShow;
+  </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+[
+  {
+    "id": "202508_Pickleball",
+    "fileBase": "202508_Pickleball",
+    "alt": "Pickleball Q1/Q2/Q3 2025",
+    "caption": "Pickleball Q1/Q2/Q3 2025",
+    "categories": ["community", "sports"],
+    "width": 5120,
+    "height": 3840,
+    "srcsetWebp": [
+      "assets/gallery/migrated/202508_Pickleball-800.webp 800w",
+      "assets/gallery/migrated/202508_Pickleball-1600.webp 1600w",
+      "assets/gallery/migrated/202508_Pickleball.webp 3000w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/202508_Pickleball.jpeg"
+  },
+  {
+    "id": "2025_DiwaliKickoff",
+    "fileBase": "2025_DiwaliKickoff",
+    "alt": "Diwali Kickoff 2025",
+    "caption": "Diwali Kickoff 2025",
+    "categories": ["festivals"],
+    "width": 4558,
+    "height": 2564,
+    "srcsetWebp": [
+      "assets/gallery/migrated/2025_DiwaliKickoff-800.webp 800w",
+      "assets/gallery/migrated/2025_DiwaliKickoff-1600.webp 1600w",
+      "assets/gallery/migrated/2025_DiwaliKickoff.webp 3000w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/2025_DiwaliKickoff.jpeg"
+  },
+  {
+    "id": "2025_Ugadhi",
+    "fileBase": "2025_Ugadhi",
+    "alt": "Ugadhi 2025",
+    "caption": "Ugadhi 2025",
+    "categories": ["festivals"],
+    "width": 5120,
+    "height": 3413,
+    "srcsetWebp": [
+      "assets/gallery/migrated/2025_Ugadhi-800.webp 800w",
+      "assets/gallery/migrated/2025_Ugadhi-1600.webp 1600w",
+      "assets/gallery/migrated/2025_Ugadhi.webp 3000w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/2025_Ugadhi.jpg"
+  },
+  {
+    "id": "2025_VolleyBall",
+    "fileBase": "2025_VolleyBall",
+    "alt": "Volleyball Tournament 2025 (Early)",
+    "caption": "Volleyball Tournament 2025 (Early)",
+    "categories": ["community", "sports"],
+    "width": 1065,
+    "height": 1421,
+    "srcsetWebp": [
+      "assets/gallery/migrated/2025_VolleyBall-800.webp 800w",
+      "assets/gallery/migrated/2025_VolleyBall.webp 1065w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/2025_VolleyBall.jpeg"
+  },
+  {
+    "id": "2025_VolleyBall2",
+    "fileBase": "2025_VolleyBall2",
+    "alt": "Volleyball Tournament 2025 (Mid)",
+    "caption": "Volleyball Tournament 2025 (Mid)",
+    "categories": ["community", "sports"],
+    "width": 5120,
+    "height": 2880,
+    "srcsetWebp": [
+      "assets/gallery/migrated/2025_VolleyBall2-800.webp 800w",
+      "assets/gallery/migrated/2025_VolleyBall2-1600.webp 1600w",
+      "assets/gallery/migrated/2025_VolleyBall2.webp 3000w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/2025_VolleyBall2.jpeg"
+  },
+  {
+    "id": "2025_VolleyBall3",
+    "fileBase": "2025_VolleyBall3",
+    "alt": "Volleyball Tournament 2025 (Late)",
+    "caption": "Volleyball Tournament 2025 (Late)",
+    "categories": ["community", "sports"],
+    "width": 3672,
+    "height": 2066,
+    "srcsetWebp": [
+      "assets/gallery/migrated/2025_VolleyBall3-800.webp 800w",
+      "assets/gallery/migrated/2025_VolleyBall3-1600.webp 1600w",
+      "assets/gallery/migrated/2025_VolleyBall3.webp 3000w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/2025_VolleyBall3.jpeg"
+  },
+  
+  {
+    "id": "Pic3",
+    "fileBase": "Pic3",
+    "alt": "Independence Day 2025",
+    "caption": "Independence Day 2025",
+    "categories": ["festivals"],
+    "width": 5120,
+    "height": 2880,
+    "srcsetWebp": [
+      "assets/gallery/migrated/Pic3-800.webp 800w",
+      "assets/gallery/migrated/Pic3-1600.webp 1600w",
+      "assets/gallery/migrated/Pic3.webp 3000w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/Pic3.jpeg"
+  },
+  {
+    "id": "Pic33",
+    "fileBase": "Pic33",
+    "alt": "Community Moment",
+    "caption": "Community Moment",
+    "categories": ["community"],
+    "width": 1024,
+    "height": 768,
+    "srcsetWebp": [
+      "assets/gallery/migrated/Pic33-800.webp 800w",
+      "assets/gallery/migrated/Pic33.webp 1024w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/Pic33.jpeg"
+  },
+  {
+    "id": "Pic4",
+    "fileBase": "Pic4",
+    "alt": "Father's Day 2025",
+    "caption": "Father's Day 2025",
+    "categories": ["community"],
+    "width": 1236,
+    "height": 1600,
+    "srcsetWebp": [
+      "assets/gallery/migrated/Pic4-800.webp 800w",
+      "assets/gallery/migrated/Pic4.webp 1236w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/Pic4.jpeg"
+  },
+  {
+    "id": "Pic5",
+    "fileBase": "Pic5",
+    "alt": "Community Gathering",
+    "caption": "Community Gathering",
+    "categories": ["community"],
+    "width": 1024,
+    "height": 768,
+    "srcsetWebp": [
+      "assets/gallery/migrated/Pic5-800.webp 800w",
+      "assets/gallery/migrated/Pic5.webp 1024w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/Pic5.jpeg"
+  },
+  {
+    "id": "Pic6",
+    "fileBase": "Pic6",
+    "alt": "Multi Cultural Event 2025",
+    "caption": "Multi Cultural Event 2025",
+    "categories": ["cultural"],
+    "width": 4558,
+    "height": 2564,
+    "srcsetWebp": [
+      "assets/gallery/migrated/Pic6-800.webp 800w",
+      "assets/gallery/migrated/Pic6-1600.webp 1600w",
+      "assets/gallery/migrated/Pic6.webp 3000w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/Pic6.jpeg"
+  },
+  {
+    "id": "PickleBallRollingCups",
+    "fileBase": "PickleBallRollingCups",
+    "alt": "Pickleball Skills 2025",
+    "caption": "Pickleball Skills 2025",
+    "categories": ["community", "sports"],
+    "width": 1200,
+    "height": 1600,
+    "srcsetWebp": [
+      "assets/gallery/migrated/PickleBallRollingCups-800.webp 800w",
+      "assets/gallery/migrated/PickleBallRollingCups.webp 1200w"
+    ],
+    "imageJpeg": "assets/gallery/migrated/PickleBallRollingCups.jpeg"
+  }
+]

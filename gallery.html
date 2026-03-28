@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--
+  AIKYAM • Gallery Page
+  - Community moments and photo gallery
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Explore AIKYAM's photo gallery showcasing our vibrant community events, cultural celebrations, family moments, and children's showcases. Relive the beautiful memories we've created together." />
+  <meta name="keywords" content="AIKYAM, gallery, photos, community events, cultural celebrations, family moments, children showcases, memories" />
+  <meta name="author" content="AIKYAM" />
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AIKYAM Gallery - Community Moments & Memories" />
+  <meta property="og:description" content="Explore AIKYAM's photo gallery showcasing vibrant community events and cultural celebrations." />
+  <meta property="og:image" content="assets/branding/logo.png" />
+  <meta property="og:url" content="https://aikyamusa.org/gallery.html" />
+  
+  <!-- Performance optimizations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/branding/logo.png" type="image/png" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="">
+  </div>
+
+  <!-- Header will be loaded by JavaScript -->
+  <div id="header-placeholder"></div>
+
+
+
+  <!-- ===== Photo Gallery ===== -->
+  <section id="photo-gallery" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Photo Gallery</h2>
+      
+      <!-- Dynamic gallery grid populated via data/galleryImages.json -->
+      <div class="gallery-grid-container" id="galleryGrid" aria-live="polite" aria-busy="false">
+        <!-- Static pre-render fallback (ensures images show even if JS fetch fails) -->
+        <figure class="gallery-item" data-category="community" data-categories="community,sports">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/202508_Pickleball-800.webp 800w, assets/gallery/migrated/202508_Pickleball-1600.webp 1600w, assets/gallery/migrated/202508_Pickleball.webp 3000w">
+            <img src="assets/gallery/migrated/202508_Pickleball.jpeg" alt="Pickleball Q1/Q2/Q3 2025" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Pickleball Q1/Q2/Q3 2025</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="festivals" data-categories="festivals">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/2025_DiwaliKickoff-800.webp 800w, assets/gallery/migrated/2025_DiwaliKickoff-1600.webp 1600w, assets/gallery/migrated/2025_DiwaliKickoff.webp 3000w">
+            <img src="assets/gallery/migrated/2025_DiwaliKickoff.jpeg" alt="Diwali Kickoff 2025" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Diwali Kickoff 2025</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="festivals" data-categories="festivals">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/2025_Ugadhi-800.webp 800w, assets/gallery/migrated/2025_Ugadhi-1600.webp 1600w, assets/gallery/migrated/2025_Ugadhi.webp 3000w">
+            <img src="assets/gallery/migrated/2025_Ugadhi.jpg" alt="Ugadhi 2025" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Ugadhi 2025</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="community" data-categories="community,sports">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/2025_VolleyBall-800.webp 800w, assets/gallery/migrated/2025_VolleyBall.webp 1065w">
+            <img src="assets/gallery/migrated/2025_VolleyBall.jpeg" alt="Volleyball Tournament 2025 (Early)" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Volleyball Tournament 2025 (Early)</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="community" data-categories="community,sports">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/2025_VolleyBall2-800.webp 800w, assets/gallery/migrated/2025_VolleyBall2-1600.webp 1600w, assets/gallery/migrated/2025_VolleyBall2.webp 3000w">
+            <img src="assets/gallery/migrated/2025_VolleyBall2.jpeg" alt="Volleyball Tournament 2025 (Mid)" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Volleyball Tournament 2025 (Mid)</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="community" data-categories="community,sports">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/2025_VolleyBall3-800.webp 800w, assets/gallery/migrated/2025_VolleyBall3-1600.webp 1600w, assets/gallery/migrated/2025_VolleyBall3.webp 3000w">
+            <img src="assets/gallery/migrated/2025_VolleyBall3.jpeg" alt="Volleyball Tournament 2025 (Late)" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Volleyball Tournament 2025 (Late)</figcaption>
+        </figure>
+        
+        <figure class="gallery-item" data-category="festivals" data-categories="festivals">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/Pic3-800.webp 800w, assets/gallery/migrated/Pic3-1600.webp 1600w, assets/gallery/migrated/Pic3.webp 3000w">
+            <img src="assets/gallery/migrated/Pic3.jpeg" alt="Independence Day 2025" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Independence Day 2025</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="community" data-categories="community">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/Pic33-800.webp 800w, assets/gallery/migrated/Pic33.webp 1024w">
+            <img src="assets/gallery/migrated/Pic33.jpeg" alt="Community Moment" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Community Moment</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="community" data-categories="community">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/Pic4-800.webp 800w, assets/gallery/migrated/Pic4.webp 1236w">
+            <img src="assets/gallery/migrated/Pic4.jpeg" alt="Father's Day 2025" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Father's Day 2025</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="community" data-categories="community">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/Pic5-800.webp 800w, assets/gallery/migrated/Pic5.webp 1024w">
+            <img src="assets/gallery/migrated/Pic5.jpeg" alt="Community Gathering" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Community Gathering</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="cultural" data-categories="cultural">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/Pic6-800.webp 800w, assets/gallery/migrated/Pic6-1600.webp 1600w, assets/gallery/migrated/Pic6.webp 3000w">
+            <img src="assets/gallery/migrated/Pic6.jpeg" alt="Multi Cultural Event 2025" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Multi Cultural Event 2025</figcaption>
+        </figure>
+        <figure class="gallery-item" data-category="community" data-categories="community,sports">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px" srcset="assets/gallery/migrated/PickleBallRollingCups-800.webp 800w, assets/gallery/migrated/PickleBallRollingCups.webp 1200w">
+            <img src="assets/gallery/migrated/PickleBallRollingCups.jpeg" alt="Pickleball Skills 2025" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Pickleball Skills 2025</figcaption>
+        </figure>
+        <!-- Kids placeholder (no images yet) -->
+        <figure class="gallery-item" data-category="kids" data-categories="kids">
+          <picture>
+            <img src="assets/branding/logo.png" alt="Kids Showcases Coming Soon" loading="lazy" decoding="async" style="filter:brightness(1.1);object-fit:contain;aspect-ratio:4/3;background:#111;">
+          </picture>
+          <figcaption>Kids Showcases – Coming Soon</figcaption>
+        </figure>
+      </div>
+      
+      <!-- Gallery Categories -->
+      <div class="gallery-category-section">
+        <h3 class="gallery-category-title">Explore by Category</h3>
+        <div class="gallery-category-buttons">
+          <button class="btn mini secondary" onclick="filterGallery('all')">All Moments</button>
+          <button class="btn mini secondary" onclick="filterGallery('cultural')">Cultural Events</button>
+          <button class="btn mini secondary" onclick="filterGallery('kids')">Kids Showcases</button>
+          <button class="btn mini secondary" onclick="filterGallery('festivals')">Festivals</button>
+          <button class="btn mini secondary" onclick="filterGallery('community')">Community Gatherings</button>
+        </div>
+      </div>
+
+      <!-- Gallery Grid (single instance) -->
+      <!-- Items inserted dynamically -->
+    </div>
+  </section>
+
+  <canvas id="fireworks-canvas"></canvas>
+  <div id="toTop" title="Back to top">↑</div>
+  <div id="toast"></div>
+  
+  <!-- Footer will be loaded by JavaScript -->
+  <div id="footer-placeholder"></div>
+  
+  <script src="script.js"></script>
+  <!-- Inline gallery JSON fallback for environments where fetch of JSON fails -->
+  <script id="galleryData" type="application/json">[
+  {"id":"202508_Pickleball","fileBase":"202508_Pickleball","alt":"Pickleball Q1/Q2/Q3 2025","caption":"Pickleball Q1/Q2/Q3 2025","categories":["community","sports"],"srcsetWebp":["assets/gallery/migrated/202508_Pickleball-800.webp 800w","assets/gallery/migrated/202508_Pickleball-1600.webp 1600w","assets/gallery/migrated/202508_Pickleball.webp 3000w"],"imageJpeg":"assets/gallery/migrated/202508_Pickleball.jpeg"},
+  {"id":"2025_DiwaliKickoff","fileBase":"2025_DiwaliKickoff","alt":"Diwali Kickoff 2025","caption":"Diwali Kickoff 2025","categories":["festivals"],"srcsetWebp":["assets/gallery/migrated/2025_DiwaliKickoff-800.webp 800w","assets/gallery/migrated/2025_DiwaliKickoff-1600.webp 1600w","assets/gallery/migrated/2025_DiwaliKickoff.webp 3000w"],"imageJpeg":"assets/gallery/migrated/2025_DiwaliKickoff.jpeg"},
+  {"id":"2025_Ugadhi","fileBase":"2025_Ugadhi","alt":"Ugadhi 2025","caption":"Ugadhi 2025","categories":["festivals"],"srcsetWebp":["assets/gallery/migrated/2025_Ugadhi-800.webp 800w","assets/gallery/migrated/2025_Ugadhi-1600.webp 1600w","assets/gallery/migrated/2025_Ugadhi.webp 3000w"],"imageJpeg":"assets/gallery/migrated/2025_Ugadhi.jpg"},
+  {"id":"2025_VolleyBall","fileBase":"2025_VolleyBall","alt":"Volleyball Tournament 2025 (Early)","caption":"Volleyball Tournament 2025 (Early)","categories":["community","sports"],"srcsetWebp":["assets/gallery/migrated/2025_VolleyBall-800.webp 800w","assets/gallery/migrated/2025_VolleyBall.webp 1065w"],"imageJpeg":"assets/gallery/migrated/2025_VolleyBall.jpeg"},
+  {"id":"2025_VolleyBall2","fileBase":"2025_VolleyBall2","alt":"Volleyball Tournament 2025 (Mid)","caption":"Volleyball Tournament 2025 (Mid)","categories":["community","sports"],"srcsetWebp":["assets/gallery/migrated/2025_VolleyBall2-800.webp 800w","assets/gallery/migrated/2025_VolleyBall2-1600.webp 1600w","assets/gallery/migrated/2025_VolleyBall2.webp 3000w"],"imageJpeg":"assets/gallery/migrated/2025_VolleyBall2.jpeg"},
+  {"id":"2025_VolleyBall3","fileBase":"2025_VolleyBall3","alt":"Volleyball Tournament 2025 (Late)","caption":"Volleyball Tournament 2025 (Late)","categories":["community","sports"],"srcsetWebp":["assets/gallery/migrated/2025_VolleyBall3-800.webp 800w","assets/gallery/migrated/2025_VolleyBall3-1600.webp 1600w","assets/gallery/migrated/2025_VolleyBall3.webp 3000w"],"imageJpeg":"assets/gallery/migrated/2025_VolleyBall3.jpeg"},
+  {"id":"Pic1","fileBase":"Pic1","alt":"Sankranthi 2025","caption":"Sankranthi 2025","categories":["festivals"],"srcsetWebp":["assets/gallery/migrated/Pic1-800.webp 800w","assets/gallery/migrated/Pic1-1600.webp 1600w","assets/gallery/migrated/Pic1.webp 1600w"],"imageJpeg":"assets/gallery/migrated/Pic1.jpeg"},
+  {"id":"Pic2","fileBase":"Pic2","alt":"Women's Day 2025","caption":"Women's Day 2025","categories":["cultural"],"srcsetWebp":["assets/gallery/migrated/Pic2-800.webp 800w","assets/gallery/migrated/Pic2-1600.webp 1600w","assets/gallery/migrated/Pic2.webp 3000w"],"imageJpeg":"assets/gallery/migrated/Pic2.jpeg"},
+  {"id":"Pic3","fileBase":"Pic3","alt":"Independence Day 2025","caption":"Independence Day 2025","categories":["festivals"],"srcsetWebp":["assets/gallery/migrated/Pic3-800.webp 800w","assets/gallery/migrated/Pic3-1600.webp 1600w","assets/gallery/migrated/Pic3.webp 3000w"],"imageJpeg":"assets/gallery/migrated/Pic3.jpeg"},
+  {"id":"Pic33","fileBase":"Pic33","alt":"Community Moment","caption":"Community Moment","categories":["community"],"srcsetWebp":["assets/gallery/migrated/Pic33-800.webp 800w","assets/gallery/migrated/Pic33.webp 1024w"],"imageJpeg":"assets/gallery/migrated/Pic33.jpeg"},
+  {"id":"Pic4","fileBase":"Pic4","alt":"Father's Day 2025","caption":"Father's Day 2025","categories":["community"],"srcsetWebp":["assets/gallery/migrated/Pic4-800.webp 800w","assets/gallery/migrated/Pic4.webp 1236w"],"imageJpeg":"assets/gallery/migrated/Pic4.jpeg"},
+  {"id":"Pic5","fileBase":"Pic5","alt":"Community Gathering","caption":"Community Gathering","categories":["community"],"srcsetWebp":["assets/gallery/migrated/Pic5-800.webp 800w","assets/gallery/migrated/Pic5.webp 1024w"],"imageJpeg":"assets/gallery/migrated/Pic5.jpeg"},
+  {"id":"Pic6","fileBase":"Pic6","alt":"Multi Cultural Event 2025","caption":"Multi Cultural Event 2025","categories":["cultural"],"srcsetWebp":["assets/gallery/migrated/Pic6-800.webp 800w","assets/gallery/migrated/Pic6-1600.webp 1600w","assets/gallery/migrated/Pic6.webp 3000w"],"imageJpeg":"assets/gallery/migrated/Pic6.jpeg"},
+  {"id":"PickleBallRollingCups","fileBase":"PickleBallRollingCups","alt":"Pickleball Skills 2025","caption":"Pickleball Skills 2025","categories":["community","sports"],"srcsetWebp":["assets/gallery/migrated/PickleBallRollingCups-800.webp 800w","assets/gallery/migrated/PickleBallRollingCups.webp 1200w"],"imageJpeg":"assets/gallery/migrated/PickleBallRollingCups.jpeg"}
+]</script>
+  <!-- filterGallery implemented in script.js for dynamic data -->
+</body>
+
+</html>
