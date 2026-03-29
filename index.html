@@ -24,6 +24,10 @@
   <link rel="canonical" href="https://aikyamusa.org/" />
   <link rel="icon" type="image/png" href="assets/branding/logo.png" />
 
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://forms.gle https://docs.google.com https://forms.fillout.com https://www.youtube.com; connect-src 'self';" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -34,7 +38,10 @@
   <div class="tricolor" aria-hidden="true"></div>
 
   <div id="bg-zoom" aria-hidden="true">
-    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background" loading="eager">
+    <picture>
+      <source type="image/webp" srcset="assets/branding/BgImage-1200.webp 1200w, assets/branding/BgImage.webp 1920w">
+      <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background" loading="eager">
+    </picture>
   </div>
 
   <!-- Header will be loaded by JavaScript -->

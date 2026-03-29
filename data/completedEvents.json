@@ -3,7 +3,7 @@
     "id": "1",
     "title": "Sankranthi",
     "date": "2025-01-18",
-    "img": "assets/gallery/migrated/Sankranthi.jpeg",
+    "img": "assets/branding/logo.png",
     "summary": "Harvest celebrations with traditional food & festivities."
   },
   {
@@ -31,7 +31,7 @@
     "id": "5",
     "title": "Women's Day",
     "date": "2025-04-11",
-    "img": "assets/gallery/migrated/WomenDay.jpeg",
+    "img": "assets/gallery/migrated/Pic2.jpeg",
     "summary": "Celebrating women with recognition and community inspiration."
   },
   {
@@ -59,7 +59,7 @@
     "id": "9",
     "title": "Independence Day",
     "date": "2025-08-15",
-    "img": "assets/gallery/migrated/IndependenceDay.jpeg",
+    "img": "assets/gallery/migrated/independenceday.jpeg",
     "summary": "Patriotic celebrations and cultural pride."
   },
   {
@@ -73,7 +73,7 @@
     "id": "11",
     "title": "Volleyball Tournament",
     "date": "2025-10-25",
-    "img": "assets/gallery/migrated/Volleyball.jpeg",
+    "img": "assets/gallery/migrated/2025_VolleyBall.jpeg",
     "summary": "Competitive volleyball bringing teams together."
   }
 ]

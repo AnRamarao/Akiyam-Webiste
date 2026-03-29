@@ -2,23 +2,23 @@
     "chairman": {
         "name": "Balaram Singamsetty (Bala)",
         "role": "Founder & Chairman",
-        "img": "assets/people/Bala.jpeg"
+        "img": "assets/people/Bala-opt.jpeg"
     },
     "members": [
         {
             "name": "Raju Kakani",
             "role": "Board of Director",
-            "img": "assets/people/Raju.jpeg"
+            "img": "assets/people/Raju-opt.jpeg"
         },
         {
             "name": "Vijay Jestadi",
             "role": "Board of Director",
-            "img": "assets/people/vijay.jpeg"
+            "img": "assets/people/Vijay-opt.jpeg"
         },
         {
             "name": "Ramarao Rimmalapudi",
             "role": "Board of Director",
-            "img": "assets/people/Ramarao.JPG"
+            "img": "assets/people/Ramarao-opt.jpeg"
         }
     ]
 }

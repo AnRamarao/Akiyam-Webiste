@@ -21,6 +21,10 @@
   <meta property="og:image" content="assets/branding/logo.png" />
   <meta property="og:url" content="https://aikyamusa.org/fillout.html" />
 
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://forms.gle https://docs.google.com https://forms.fillout.com https://www.youtube.com; connect-src 'self';" />
+
   <!-- Performance optimizations -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,7 +37,10 @@
   <div class="tricolor" aria-hidden="true"></div>
 
   <div id="bg-zoom" aria-hidden="true">
-    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background">
+    <picture>
+      <source type="image/webp" srcset="assets/branding/BgImage-1200.webp 1200w, assets/branding/BgImage.webp 1920w">
+      <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background">
+    </picture>
   </div>
 
   <!-- Header will be loaded by JavaScript -->
