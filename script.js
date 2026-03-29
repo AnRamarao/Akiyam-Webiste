@@ -7,6 +7,46 @@
 
 /* ===================== UTILITY FUNCTIONS ==================== */
 
+/** Create a themed circular placeholder with initials for missing images. */
+function createInitialsPlaceholder(name, { width = '180px', height = '180px', fontSize = 36, borderRadius = '50%', shadow = '0 8px 24px rgba(255, 204, 0, 0.3)' } = {}) {
+  const initials = name.split(' ').map(w => w[0]).join('').slice(0, 2);
+  const placeholder = document.createElement('div');
+  placeholder.style.cssText = `
+    width: ${width}; height: ${height};
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: ${borderRadius}; color: #000; font-weight: bold;
+    font-size: ${fontSize}px; text-align: center;
+    margin: 0 auto 16px auto; box-shadow: ${shadow};
+  `;
+  placeholder.textContent = initials;
+  return placeholder;
+}
+
+/** Attach a one-time error handler that replaces a failed <img> with an initials placeholder. */
+function attachImageFallback(img, name, opts = {}) {
+  img.addEventListener('error', () => {
+    img.replaceWith(createInitialsPlaceholder(name, opts));
+  }, { once: true });
+}
+
+/** Attach a fallback chain: try event.fallback image first, then initials placeholder. */
+function attachEventImageFallback(img, event) {
+  let fallbackTried = false;
+  img.addEventListener('error', function handler() {
+    if (!fallbackTried && event.fallback) {
+      fallbackTried = true;
+      img.src = event.fallback;
+    } else {
+      img.removeEventListener('error', handler);
+      img.replaceWith(createInitialsPlaceholder(event.title, {
+        width: '100%', height: '200px', borderRadius: '8px', fontSize: 24,
+        shadow: '0 4px 12px rgba(255, 204, 0, 0.3)'
+      }));
+    }
+  });
+}
+
 /* ===================== HEADER LOADING ==================== */
 async function loadHeader() {
   try {
@@ -319,32 +359,9 @@ async function loadData() {
           <div class="role">${member.role}</div>
         `;
         
-        // Add themed fallback for missing images
         const img = card.querySelector('img');
-        if (img) {
-          img.addEventListener('error', () => {
-            const initials = member.name.split(' ').map(word => word[0]).join('').slice(0, 2);
-            const placeholder = document.createElement('div');
-            placeholder.style.cssText = `
-              width: 180px;
-              height: 180px;
-              background: linear-gradient(135deg, #ffcc00, #ff9900);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              border-radius: 50%;
-              color: #000;
-              font-weight: bold;
-              font-size: 36px;
-              text-align: center;
-              margin: 0 auto 16px auto;
-              box-shadow: 0 8px 24px rgba(255, 204, 0, 0.3);
-            `;
-            placeholder.textContent = initials;
-            img.replaceWith(placeholder);
-          }, { once: true });
-        }
-        
+        if (img) attachImageFallback(img, member.name);
+
         coreContainer.appendChild(card);
       });
     }
@@ -367,29 +384,7 @@ async function loadData() {
                 <div class="role">${member.role}</div>
               `;
               const img = card.querySelector('img');
-              if (img) {
-                img.addEventListener('error', () => {
-                  const initials = member.name.split(' ').map(w => w[0]).join('').slice(0,2);
-                  const placeholder = document.createElement('div');
-                  placeholder.style.cssText = `
-                    width: 180px;
-                    height: 180px;
-                    background: linear-gradient(135deg, #ffcc00, #ff9900);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 50%;
-                    color: #000;
-                    font-weight: bold;
-                    font-size: 36px;
-                    text-align: center;
-                    margin: 0 auto 16px auto;
-                    box-shadow: 0 8px 24px rgba(255, 204, 0, 0.3);
-                  `;
-                  placeholder.textContent = initials;
-                  img.replaceWith(placeholder);
-                }, { once: true });
-              }
+              if (img) attachImageFallback(img, member.name);
               core2026Container.appendChild(card);
             });
               if (coreTeam2026.length === 0) {
@@ -412,8 +407,10 @@ async function loadData() {
     
     // Load events
     const upcomingResponse = await fetch('./data/upcomingEvents.json');
+    if (!upcomingResponse.ok) throw new Error(`Failed to load upcoming events: ${upcomingResponse.status}`);
     const upcomingEvents = await upcomingResponse.json();
     const completedResponse = await fetch('./data/completedEvents.json');
+    if (!completedResponse.ok) throw new Error(`Failed to load completed events: ${completedResponse.status}`);
     const completedEvents = await completedResponse.json();
     
     // Render past events
@@ -440,38 +437,9 @@ async function loadData() {
           <div class="event-desc">${event.summary}</div>
         `;
         
-        // Add fallback handling for event images
         const img = card.querySelector('img');
-        if (img) {
-          let fallbackTried = false;
-          img.addEventListener('error', () => {
-            if (!fallbackTried && event.fallback) {
-              fallbackTried = true;
-              img.src = event.fallback;
-            } else {
-              // Create themed placeholder
-              const initials = event.title.split(' ').map(word => word[0]).join('').slice(0, 2);
-              const placeholder = document.createElement('div');
-              placeholder.style.cssText = `
-                width: 100%;
-                height: 200px;
-                background: linear-gradient(135deg, #ffcc00, #ff9900);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 8px;
-                color: #000;
-                font-weight: bold;
-                font-size: 24px;
-                text-align: center;
-                box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
-              `;
-              placeholder.textContent = initials;
-              img.replaceWith(placeholder);
-            }
-          }, { once: false });
-        }
-        
+        if (img) attachEventImageFallback(img, event);
+
         wrapper.appendChild(card);
       });
       pastContainer.appendChild(wrapper);
@@ -512,38 +480,9 @@ async function loadData() {
           </div>
         `;
         
-        // Add fallback handling for event images
         const img = card.querySelector('img');
-        if (img) {
-          let fallbackTried = false;
-          img.addEventListener('error', () => {
-            if (!fallbackTried && event.fallback) {
-              fallbackTried = true;
-              img.src = event.fallback;
-            } else {
-              // Create themed placeholder
-              const initials = event.title.split(' ').map(word => word[0]).join('').slice(0, 2);
-              const placeholder = document.createElement('div');
-              placeholder.style.cssText = `
-                width: 100%;
-                height: 200px;
-                background: linear-gradient(135deg, #ffcc00, #ff9900);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 8px;
-                color: #000;
-                font-weight: bold;
-                font-size: 24px;
-                text-align: center;
-                box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
-              `;
-              placeholder.textContent = initials;
-              img.replaceWith(placeholder);
-            }
-          }, { once: false });
-        }
-        
+        if (img) attachEventImageFallback(img, event);
+
         // Add click handler for "Add to Calendar" button
         if (!event.tbd) {
           const addCalBtn = card.querySelector('.add-to-cal-btn');
@@ -562,6 +501,7 @@ async function loadData() {
     
     // Load and render board members
     const boardResponse = await fetch('./data/boardMembers.json');
+    if (!boardResponse.ok) throw new Error(`Failed to load board members: ${boardResponse.status}`);
     const boardData = await boardResponse.json();
     
     // Render chairman separately
@@ -577,35 +517,12 @@ async function loadData() {
         <div class="role">${member.role}</div>
       `;
       
-      // Add themed fallback for missing images
       const img = card.querySelector('img');
-      if (img) {
-        img.addEventListener('error', () => {
-          const initials = member.name.split(' ').map(word => word[0]).join('').slice(0, 2);
-          const placeholder = document.createElement('div');
-          placeholder.style.cssText = `
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, #ffcc00, #ff9900);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: #000;
-            font-weight: bold;
-            font-size: 36px;
-            text-align: center;
-            margin: 0 auto 16px auto;
-            box-shadow: 0 8px 24px rgba(255, 204, 0, 0.3);
-          `;
-          placeholder.textContent = initials;
-          img.replaceWith(placeholder);
-        }, { once: true });
-      }
-      
+      if (img) attachImageFallback(img, member.name);
+
       chairmanContainer.appendChild(card);
     }
-    
+
     // Render other board members
     const boardContainer = document.getElementById('boardCards');
     if (boardContainer && Array.isArray(boardData.members)) {
@@ -618,33 +535,9 @@ async function loadData() {
           <div class="name">${member.name}</div>
           <div class="role">${member.role}</div>
         `;
-        
-        // Add themed fallback for missing images
         const img = card.querySelector('img');
-        if (img) {
-          img.addEventListener('error', () => {
-            const initials = member.name.split(' ').map(word => word[0]).join('').slice(0, 2);
-            const placeholder = document.createElement('div');
-            placeholder.style.cssText = `
-              width: 180px;
-              height: 180px;
-              background: linear-gradient(135deg, #ffcc00, #ff9900);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              border-radius: 50%;
-              color: #000;
-              font-weight: bold;
-              font-size: 36px;
-              text-align: center;
-              margin: 0 auto 16px auto;
-              box-shadow: 0 8px 24px rgba(255, 204, 0, 0.3);
-            `;
-            placeholder.textContent = initials;
-            img.replaceWith(placeholder);
-          }, { once: true });
-        }
-        
+        if (img) attachImageFallback(img, member.name);
+
         boardContainer.appendChild(card);
       });
       // If exactly three board members, apply single-row layout modifier
@@ -990,14 +883,23 @@ function showAddToCalendarOptions(event) {
   });
   
   // Close modal functionality
-  const closeModal = () => document.body.removeChild(modal);
+  const closeModal = () => {
+    document.removeEventListener('keydown', onEscape);
+    document.body.removeChild(modal);
+  };
+  const onEscape = (e) => { if (e.key === 'Escape') closeModal(); };
+  document.addEventListener('keydown', onEscape);
   content.querySelector('.close-modal').addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
-  
+
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', `Add ${event.title} to calendar`);
   modal.appendChild(content);
   document.body.appendChild(modal);
+  content.querySelector('.close-modal').focus();
 }
 
 /** Date-only equality check. */
@@ -1239,8 +1141,9 @@ function makeVendorCard(vendor) {
   const categoryClass = `vendor-logo-placeholder--${category.toLowerCase()}`;
   const placeholderClass = `vendor-logo-placeholder ${categoryClass}`;
   
-  // Create phone link if phone number exists
-  const phoneLink = vendorPhone ? `<a href="tel:${vendorPhone}" class="vendor-phone">${vendorPhone}</a>` : '';
+  // Create phone link if phone number exists and looks valid
+  const hasValidPhone = vendorPhone && /\d{3,}/.test(vendorPhone);
+  const phoneLink = hasValidPhone ? `<a href="tel:${vendorPhone}" class="vendor-phone">${vendorPhone}</a>` : '';
   
   div.innerHTML = `
     <div class="vendor-link">
@@ -1463,6 +1366,19 @@ async function loadGallery() {
     grid.setAttribute('data-gallery-error', err.message || 'unknown');
   }
 }
+
+// Initialize gallery filter buttons via event delegation (replaces inline onclick)
+(function initGalleryFilters() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-gallery-filter]');
+    if (!btn) return;
+    const category = btn.getAttribute('data-gallery-filter');
+    // Update aria-pressed on all gallery filter buttons
+    document.querySelectorAll('[data-gallery-filter]').forEach(b => b.setAttribute('aria-pressed', 'false'));
+    btn.setAttribute('aria-pressed', 'true');
+    filterGallery(category);
+  });
+})();
 
 function filterGallery(category) {
   const grid = document.getElementById('galleryGrid');

@@ -33,7 +33,7 @@
   <div class="tricolor" aria-hidden="true"></div>
 
   <div id="bg-zoom" aria-hidden="true">
-    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="">
+    <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background">
   </div>
 
   <!-- Header will be loaded by JavaScript -->
@@ -41,6 +41,7 @@
 
 
 
+  <div id="main-content"></div>
   <!-- ===== Photo Gallery ===== -->
   <section id="photo-gallery" class="reveal">
     <div class="container">
@@ -147,11 +148,11 @@
       <div class="gallery-category-section">
         <h3 class="gallery-category-title">Explore by Category</h3>
         <div class="gallery-category-buttons">
-          <button class="btn mini secondary" onclick="filterGallery('all')">All Moments</button>
-          <button class="btn mini secondary" onclick="filterGallery('cultural')">Cultural Events</button>
-          <button class="btn mini secondary" onclick="filterGallery('kids')">Kids Showcases</button>
-          <button class="btn mini secondary" onclick="filterGallery('festivals')">Festivals</button>
-          <button class="btn mini secondary" onclick="filterGallery('community')">Community Gatherings</button>
+          <button class="btn mini secondary" data-gallery-filter="all" aria-pressed="true">All Moments</button>
+          <button class="btn mini secondary" data-gallery-filter="cultural" aria-pressed="false">Cultural Events</button>
+          <button class="btn mini secondary" data-gallery-filter="kids" aria-pressed="false">Kids Showcases</button>
+          <button class="btn mini secondary" data-gallery-filter="festivals" aria-pressed="false">Festivals</button>
+          <button class="btn mini secondary" data-gallery-filter="community" aria-pressed="false">Community Gatherings</button>
         </div>
       </div>
 
