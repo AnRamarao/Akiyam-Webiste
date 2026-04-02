@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Login – AIKYAM</title>
+  <meta name="title" content="Login – AIKYAM" />
+  <meta name="description" content="Sign in to your AIKYAM member account." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/png" href="assets/branding/logo.png" />
+  <link rel="apple-touch-icon" href="assets/branding/logo.png" />
+
+  <!-- Allow backend API calls during development -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' http://127.0.0.1:8000 http://localhost:8000;" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <picture>
+      <source type="image/webp" srcset="assets/branding/BgImage-1200.webp 1200w, assets/branding/BgImage.webp 1920w">
+      <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background">
+    </picture>
+  </div>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="login-page">
+    <div class="login-card reveal">
+
+      <div class="login-card__logo">
+        <img src="assets/branding/logo.png" alt="AIKYAM Logo" width="72" height="72">
+      </div>
+
+      <h1 class="login-card__title">Welcome Back</h1>
+      <p class="login-card__subtitle">Sign in to your AIKYAM account</p>
+
+      <form class="login-form" id="loginForm" novalidate>
+        <div class="login-form__group">
+          <label class="login-form__label" for="email">Email Address</label>
+          <input class="login-form__input" type="email" id="email" name="email" autocomplete="email"
+            placeholder="you@example.com" required />
+        </div>
+
+        <div class="login-form__group">
+          <label class="login-form__label" for="password">Password</label>
+          <input class="login-form__input" type="password" id="password" name="password" autocomplete="current-password"
+            placeholder="Enter your password" required />
+        </div>
+
+        <p id="loginMessage" aria-live="polite"></p>
+
+        <button type="submit" class="login-form__submit">Sign In</button>
+      </form>
+
+      <p class="login-form__footer">
+        Don't have an account? <a href="join.html">Join AIKYAM</a>
+      </p>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
