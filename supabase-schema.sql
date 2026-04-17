@@ -324,7 +324,166 @@ CREATE POLICY "Admins can delete events"
   USING (public.user_is_admin());
 
 -- ============================================================
--- 9. OPTIONAL: pg_cron scheduled jobs (run after enabling pg_cron extension)
+-- 9. TEAM MEMBERS TABLE
+-- ============================================================
+-- Unified table for board members, executive committee (by year)
+
+DO $$ BEGIN
+  CREATE TYPE public.team_group AS ENUM (
+    'board',
+    'executive'
+  );
+EXCEPTION WHEN duplicate_object THEN
+  RAISE NOTICE 'type team_group already exists — skipping';
+END $$;
+
+CREATE TABLE IF NOT EXISTS public.team_members (
+  id          UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name        TEXT NOT NULL,
+  title       TEXT NOT NULL DEFAULT '',
+  img         TEXT DEFAULT 'assets/branding/logo.png',
+  team_group  public.team_group NOT NULL DEFAULT 'executive',
+  year        INT,
+  is_chairman BOOLEAN DEFAULT false,
+  sort_order  INT DEFAULT 0,
+  active      BOOLEAN DEFAULT true,
+  created_at  TIMESTAMPTZ DEFAULT now(),
+  updated_at  TIMESTAMPTZ DEFAULT now()
+);
+
+ALTER TABLE public.team_members ENABLE ROW LEVEL SECURITY;
+
+DROP TRIGGER IF EXISTS team_members_updated_at ON public.team_members;
+CREATE TRIGGER team_members_updated_at
+  BEFORE UPDATE ON public.team_members
+  FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
+
+-- RLS: public reads active members
+DO $$ BEGIN
+  DROP POLICY IF EXISTS "Public can read active team members"   ON public.team_members;
+  DROP POLICY IF EXISTS "Managers can read all team members"     ON public.team_members;
+  DROP POLICY IF EXISTS "ContentManagers can manage team members" ON public.team_members;
+  DROP POLICY IF EXISTS "Admins can delete team members"         ON public.team_members;
+END $$;
+
+CREATE POLICY "Public can read active team members"
+  ON public.team_members FOR SELECT
+  USING (active = true);
+
+CREATE POLICY "Managers can read all team members"
+  ON public.team_members FOR SELECT
+  USING (public.user_has_min_role('ProgramManager'));
+
+CREATE POLICY "ContentManagers can manage team members"
+  ON public.team_members FOR ALL
+  USING (public.user_has_min_role('ContentManager'));
+
+CREATE POLICY "Admins can delete team members"
+  ON public.team_members FOR DELETE
+  USING (public.user_is_admin());
+
+-- ============================================================
+-- 10. VENDORS TABLE
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS public.vendors (
+  id              UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  category        TEXT NOT NULL,
+  sub_category    TEXT DEFAULT '',
+  vendor_name     TEXT NOT NULL,
+  vendor_phone    TEXT DEFAULT '',
+  referred_by     TEXT DEFAULT '',
+  comment         TEXT DEFAULT '',
+  active          BOOLEAN DEFAULT true,
+  sort_order      INT DEFAULT 0,
+  created_at      TIMESTAMPTZ DEFAULT now(),
+  updated_at      TIMESTAMPTZ DEFAULT now()
+);
+
+ALTER TABLE public.vendors ENABLE ROW LEVEL SECURITY;
+
+CREATE INDEX IF NOT EXISTS idx_vendors_category ON public.vendors (category);
+
+DROP TRIGGER IF EXISTS vendors_updated_at ON public.vendors;
+CREATE TRIGGER vendors_updated_at
+  BEFORE UPDATE ON public.vendors
+  FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
+
+DO $$ BEGIN
+  DROP POLICY IF EXISTS "Public can read active vendors"       ON public.vendors;
+  DROP POLICY IF EXISTS "Managers can read all vendors"         ON public.vendors;
+  DROP POLICY IF EXISTS "ContentManagers can manage vendors"    ON public.vendors;
+  DROP POLICY IF EXISTS "Admins can delete vendors"             ON public.vendors;
+END $$;
+
+CREATE POLICY "Public can read active vendors"
+  ON public.vendors FOR SELECT
+  USING (active = true);
+
+CREATE POLICY "Managers can read all vendors"
+  ON public.vendors FOR SELECT
+  USING (public.user_has_min_role('ProgramManager'));
+
+CREATE POLICY "ContentManagers can manage vendors"
+  ON public.vendors FOR ALL
+  USING (public.user_has_min_role('ContentManager'));
+
+CREATE POLICY "Admins can delete vendors"
+  ON public.vendors FOR DELETE
+  USING (public.user_is_admin());
+
+-- ============================================================
+-- 11. GALLERY IMAGES TABLE
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS public.gallery_images (
+  id              UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  file_base       TEXT NOT NULL,
+  alt             TEXT DEFAULT '',
+  caption         TEXT DEFAULT '',
+  categories      TEXT[] DEFAULT '{}',
+  width           INT,
+  height          INT,
+  srcset_webp     TEXT[] DEFAULT '{}',
+  image_jpeg      TEXT DEFAULT '',
+  active          BOOLEAN DEFAULT true,
+  sort_order      INT DEFAULT 0,
+  created_at      TIMESTAMPTZ DEFAULT now(),
+  updated_at      TIMESTAMPTZ DEFAULT now()
+);
+
+ALTER TABLE public.gallery_images ENABLE ROW LEVEL SECURITY;
+
+DROP TRIGGER IF EXISTS gallery_images_updated_at ON public.gallery_images;
+CREATE TRIGGER gallery_images_updated_at
+  BEFORE UPDATE ON public.gallery_images
+  FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
+
+DO $$ BEGIN
+  DROP POLICY IF EXISTS "Public can read active gallery images"      ON public.gallery_images;
+  DROP POLICY IF EXISTS "Managers can read all gallery images"        ON public.gallery_images;
+  DROP POLICY IF EXISTS "ContentManagers can manage gallery images"   ON public.gallery_images;
+  DROP POLICY IF EXISTS "Admins can delete gallery images"            ON public.gallery_images;
+END $$;
+
+CREATE POLICY "Public can read active gallery images"
+  ON public.gallery_images FOR SELECT
+  USING (active = true);
+
+CREATE POLICY "Managers can read all gallery images"
+  ON public.gallery_images FOR SELECT
+  USING (public.user_has_min_role('ProgramManager'));
+
+CREATE POLICY "ContentManagers can manage gallery images"
+  ON public.gallery_images FOR ALL
+  USING (public.user_has_min_role('ContentManager'));
+
+CREATE POLICY "Admins can delete gallery images"
+  ON public.gallery_images FOR DELETE
+  USING (public.user_is_admin());
+
+-- ============================================================
+-- 12. OPTIONAL: pg_cron scheduled jobs (run after enabling pg_cron extension)
 -- ============================================================
 -- Enable pg_cron in Supabase: Dashboard > Database > Extensions > pg_cron
 -- Then run:

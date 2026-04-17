@@ -111,6 +111,21 @@ async function loadHeader() {
       AIKYAM_Auth.updateHeaderAuthState();
     }
 
+    // Admin dropdown toggle
+    var adminToggle = headerPlaceholder.querySelector('.nav-admin-dropdown__toggle');
+    if (adminToggle) {
+      var adminMenu = headerPlaceholder.querySelector('.nav-admin-dropdown__menu');
+      adminToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = adminMenu.classList.toggle('show');
+        adminToggle.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', function () {
+        adminMenu.classList.remove('show');
+        adminToggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+
     // For home page, also check scroll position
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     if (currentPage === 'index.html' || currentPage === '') {
@@ -362,14 +377,26 @@ let globalVendors = [];
 async function loadData() {
   
   try {
-    // Load core team with error handling
-    const coreResponse = await fetch('./data/coreTeam.json');
-    if (!coreResponse.ok) {
-      throw new Error(`Failed to load core team data: ${coreResponse.status}`);
+    // Load team data (Supabase with JSON fallback)
+    let teamData;
+    if (window.AIKYAM_Team) {
+      teamData = await AIKYAM_Team.fetchPublicTeam();
+    } else {
+      // JSON fallback
+      const [boardResp, coreResp, core2026Resp] = await Promise.all([
+        fetch('./data/boardMembers.json'),
+        fetch('./data/coreTeam.json'),
+        fetch('./data/coreTeam2026.json')
+      ]);
+      const board = boardResp.ok ? await boardResp.json() : { chairman: null, members: [] };
+      const core = coreResp.ok ? await coreResp.json() : [];
+      const core2026 = core2026Resp.ok ? await core2026Resp.json() : [];
+      teamData = { chairman: board.chairman, boardMembers: board.members || [], executiveByYear: { 2025: core, 2026: core2026 } };
     }
-    const coreTeam = await coreResponse.json();
-    
-    // Render core team
+
+    // Render core team (current year executive committee)
+    const currentYear = new Date().getFullYear();
+    const coreTeam = teamData.executiveByYear[currentYear] || teamData.executiveByYear[currentYear - 1] || [];
     const coreContainer = document.getElementById('coreCards');
     if (coreContainer && Array.isArray(coreTeam)) {
       coreContainer.innerHTML = '';
@@ -383,38 +410,22 @@ async function loadData() {
       });
     }
 
-    // Attempt to load 2026 core team placed under Events section
+    // Render next year executive committee if available
     const core2026Container = document.getElementById('coreTeam2026Cards');
     if (core2026Container) {
-      try {
-        const core2026Response = await fetch('./data/coreTeam2026.json');
-        if (core2026Response.ok) {
-          const coreTeam2026 = await core2026Response.json();
-          if (Array.isArray(coreTeam2026)) {
-            core2026Container.innerHTML = '';
-            coreTeam2026.forEach(member => {
-              const card = document.createElement('div');
-              card.className = 'person-card';
-              card.innerHTML = personCardHTML(member);
-              const img = card.querySelector('img');
-              if (img) attachImageFallback(img, member.name);
-              core2026Container.appendChild(card);
-            });
-              if (coreTeam2026.length === 0) {
-                core2026Container.innerHTML = '<div class="hint" style="padding:24px;text-align:center;">No Executive Committee members for 2026 yet.</div>';
-              }
-          }
-            else {
-              core2026Container.innerHTML = '<div class="hint" style="padding:24px;text-align:center;">Executive Committee 2026 data format error.</div>';
-            }
-        } else {
-          // Non-fatal: leave container empty if 404 or error
-            core2026Container.innerHTML = `<div class="hint" style="padding:24px;text-align:center;">Executive Committee 2026 data not found (${core2026Response.status}).</div>`;
-            console.warn('Core Team 2026 data not found:', core2026Response.status);
-        }
-      } catch (e) {
-          core2026Container.innerHTML = `<div class="hint" style="padding:24px;text-align:center;">Error loading Executive Committee 2026: ${e.message}</div>`;
-          console.warn('Failed loading Core Team 2026:', e.message);
+      const nextYearTeam = teamData.executiveByYear[currentYear + 1] || [];
+      if (nextYearTeam.length > 0) {
+        core2026Container.innerHTML = '';
+        nextYearTeam.forEach(member => {
+          const card = document.createElement('div');
+          card.className = 'person-card';
+          card.innerHTML = personCardHTML(member);
+          const img = card.querySelector('img');
+          if (img) attachImageFallback(img, member.name);
+          core2026Container.appendChild(card);
+        });
+      } else {
+        core2026Container.innerHTML = '<div class="hint" style="padding:24px;text-align:center;">No Executive Committee members for next year yet.</div>';
       }
     }
     
@@ -519,16 +530,11 @@ async function loadData() {
       upcomingContainer.appendChild(wrapper);
     }
     
-    // Load and render board members
-    const boardResponse = await fetch('./data/boardMembers.json');
-    if (!boardResponse.ok) throw new Error(`Failed to load board members: ${boardResponse.status}`);
-    const boardData = await boardResponse.json();
-    
-    // Render chairman separately
+    // Render chairman separately (already loaded in teamData)
     const chairmanContainer = document.getElementById('chairmanCard');
-    if (chairmanContainer && boardData.chairman) {
+    if (chairmanContainer && teamData.chairman) {
       chairmanContainer.innerHTML = '';
-      const member = boardData.chairman;
+      const member = teamData.chairman;
       const card = document.createElement('div');
       card.className = 'person-card';
       card.innerHTML = personCardHTML(member);
@@ -537,11 +543,11 @@ async function loadData() {
       chairmanContainer.appendChild(card);
     }
 
-    // Render other board members
+    // Render other board members (already loaded in teamData)
     const boardContainer = document.getElementById('boardCards');
-    if (boardContainer && Array.isArray(boardData.members)) {
+    if (boardContainer && Array.isArray(teamData.boardMembers)) {
       boardContainer.innerHTML = '';
-      boardData.members.forEach(member => {
+      teamData.boardMembers.forEach(member => {
         const card = document.createElement('div');
         card.className = 'person-card';
         card.innerHTML = personCardHTML(member);
@@ -549,9 +555,7 @@ async function loadData() {
         if (img) attachImageFallback(img, member.name);
         boardContainer.appendChild(card);
       });
-      // If exactly three board members, apply single-row layout modifier
-      if (boardData.members.length === 3) {
-        // Ensure base class present then apply modifier
+      if (teamData.boardMembers.length === 3) {
         if (!boardContainer.classList.contains('board-cards')) {
           boardContainer.classList.add('board-cards');
         }
@@ -562,13 +566,15 @@ async function loadData() {
     // Render calendar
     renderCalendar(upcomingEvents);
     
-    // Load and render vendors
-    const vendorsResponse = await fetch('./data/vendors.json');
-    if (!vendorsResponse.ok) {
-      throw new Error(`Failed to load vendors data: ${vendorsResponse.status}`);
+    // Load vendors (Supabase with JSON fallback)
+    if (window.AIKYAM_Vendors) {
+      globalVendors = await AIKYAM_Vendors.fetchPublicVendors();
+    } else {
+      const vendorsResponse = await fetch('./data/vendors.json');
+      if (!vendorsResponse.ok) throw new Error(`Failed to load vendors data: ${vendorsResponse.status}`);
+      globalVendors = await vendorsResponse.json();
     }
-    globalVendors = await vendorsResponse.json();
-    
+
     if (!Array.isArray(globalVendors)) {
       throw new Error('Vendors data is not in expected format');
     }
@@ -1275,63 +1281,24 @@ async function loadGallery() {
   grid.innerHTML = '<div class="hint">Loading gallery...</div>';
   grid.setAttribute('aria-busy', 'true');
   try {
-    // Use ./ prefix for consistency with other data fetches; attempt fallback if first fails
-    let res;
-    const primaryPath = './data/galleryImages.json';
-    const altPath = '/data/galleryImages.json'; // In case site is deployed at domain root and relative path breaks
-    try {
-      res = await fetch(primaryPath);
-    } catch (e) {
-      console.warn('Gallery primary fetch threw before response:', e);
-    }
-    if (!res || !res.ok) {
-      console.warn('Gallery primary path failed:', primaryPath, res && res.status);
-      try {
-        res = await fetch(altPath);
-      } catch (e) {
-        console.warn('Gallery alt fetch threw before response:', e);
+    // Load gallery data (Supabase with JSON fallback)
+    let items;
+    if (window.AIKYAM_Gallery) {
+      items = await AIKYAM_Gallery.fetchPublicGallery();
+    } else {
+      let res;
+      try { res = await fetch('./data/galleryImages.json'); } catch (e) { /* ignore */ }
+      if (!res || !res.ok) {
+        try { res = await fetch('/data/galleryImages.json'); } catch (e) { /* ignore */ }
+      }
+      if (!res || !res.ok) {
+        const inline = document.getElementById('galleryData');
+        if (inline) items = JSON.parse(inline.textContent || '[]');
+      } else {
+        items = await res.json();
       }
     }
-    // Inline fallback: if both fetch attempts failed, try embedded JSON script tag
-    if ((!res || !res.ok)) {
-      const inline = document.getElementById('galleryData');
-      if (inline) {
-        console.warn('Gallery: using inline JSON fallback');
-        const items = JSON.parse(inline.textContent || '[]');
-        if (Array.isArray(items) && items.length) {
-          grid.innerHTML = '';
-          items.forEach(item => {
-            const fig = document.createElement('figure');
-            fig.className = 'gallery-item';
-            fig.dataset.categories = (item.categories || []).join(',');
-            fig.setAttribute('data-category', (item.categories && item.categories[0]) || 'community');
-            const picture = document.createElement('picture');
-            const source = document.createElement('source');
-            source.type = 'image/webp';
-            source.sizes = '(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 300px';
-            source.srcset = (item.srcsetWebp || []).join(', ');
-            const img = document.createElement('img');
-            img.src = item.imageJpeg;
-            img.alt = item.alt || item.caption || 'Gallery image';
-            img.loading = 'lazy';
-            img.decoding = 'async';
-            picture.appendChild(source);
-            picture.appendChild(img);
-            const cap = document.createElement('figcaption');
-            cap.textContent = item.caption || item.alt || 'Untitled';
-            fig.appendChild(picture);
-            fig.appendChild(cap);
-            grid.appendChild(fig);
-          });
-          grid.removeAttribute('aria-busy');
-          announceToScreenReader(`Gallery loaded: ${items.length} images (inline)`);
-          filterGallery('all');
-          return;
-        }
-      }
-    }
-    if (!res || !res.ok) throw new Error('Gallery manifest fetch failed (tried: ' + primaryPath + (primaryPath !== altPath ? ', ' + altPath : '') + ')');
-    const items = await res.json();
+    if (!items) items = [];
     if (!Array.isArray(items)) throw new Error('Invalid gallery manifest');
     grid.innerHTML = '';
     items.forEach(item => {

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Gallery Management – AIKYAM</title>
+  <meta name="title" content="Gallery Management – AIKYAM" />
+  <meta name="description" content="Manage AIKYAM gallery images." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/png" href="assets/branding/logo.png" />
+  <link rel="apple-touch-icon" href="assets/branding/logo.png" />
+
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co;" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <picture>
+      <source type="image/webp" srcset="assets/branding/BgImage-1200.webp 1200w, assets/branding/BgImage.webp 1920w">
+      <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background">
+    </picture>
+  </div>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="admin-page">
+    <div class="admin-page__container">
+
+      <div class="admin-page__header">
+        <h1 class="admin-page__title">Gallery Management</h1>
+        <button class="btn btn--primary" id="createImageBtn">+ New Image</button>
+      </div>
+
+      <div class="admin-tabs" id="categoryTabs">
+        <button class="admin-tabs__tab admin-tabs__tab--active" data-category="all">All</button>
+        <!-- Tabs are dynamically populated from data -->
+      </div>
+
+      <div class="admin-list" id="imagesList">
+        <div class="admin-list__empty">Loading gallery images...</div>
+      </div>
+
+      <!-- Image form modal -->
+      <div class="admin-modal" id="imageModal" style="display:none;" role="dialog" aria-modal="true"
+        aria-label="Gallery image form">
+        <div class="admin-modal__backdrop" id="modalBackdrop"></div>
+        <div class="admin-modal__content">
+          <div class="admin-modal__header">
+            <h2 class="admin-modal__title" id="modalTitle">Add Image</h2>
+            <button class="admin-modal__close" id="modalClose" aria-label="Close">&times;</button>
+          </div>
+
+          <form class="admin-form" id="imageForm" novalidate>
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="imgFileBase">File Base (unique ID) *</label>
+              <input class="admin-form__input" type="text" id="imgFileBase" placeholder="e.g. diwali-2025" required />
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="imgAlt">Alt Text *</label>
+              <input class="admin-form__input" type="text" id="imgAlt" placeholder="Descriptive text for accessibility" required />
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="imgCaption">Caption</label>
+              <input class="admin-form__input" type="text" id="imgCaption" />
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="imgCategories">Categories (comma-separated)</label>
+              <input class="admin-form__input" type="text" id="imgCategories" placeholder="e.g. events, diwali, 2025" />
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="imgJpeg">JPEG Path *</label>
+              <input class="admin-form__input" type="text" id="imgJpeg" placeholder="e.g. assets/gallery/diwali-2025.jpg" required />
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="imgSrcsetWebp">WebP Srcset (comma-separated paths)</label>
+              <input class="admin-form__input" type="text" id="imgSrcsetWebp" placeholder="e.g. assets/gallery/diwali-2025-400.webp, assets/gallery/diwali-2025-800.webp" />
+            </div>
+
+            <div class="admin-form__row">
+              <div class="admin-form__group">
+                <label class="admin-form__label" for="imgWidth">Width (px)</label>
+                <input class="admin-form__input" type="number" id="imgWidth" min="1" />
+              </div>
+              <div class="admin-form__group">
+                <label class="admin-form__label" for="imgHeight">Height (px)</label>
+                <input class="admin-form__input" type="number" id="imgHeight" min="1" />
+              </div>
+            </div>
+
+            <div class="admin-form__row">
+              <div class="admin-form__group">
+                <label class="admin-form__label" for="imgOrder">Sort Order</label>
+                <input class="admin-form__input" type="number" id="imgOrder" value="0" min="0" />
+              </div>
+              <div class="admin-form__group admin-form__group--inline" style="margin-top:24px;">
+                <input type="checkbox" id="imgActive" checked />
+                <label class="admin-form__label" for="imgActive">Active (visible on public site)</label>
+              </div>
+            </div>
+
+            <p id="formMessage" class="admin-form__message" aria-live="polite"></p>
+
+            <div class="admin-form__actions">
+              <button type="submit" class="btn btn--primary" id="formSubmitBtn">Save</button>
+              <button type="button" class="btn btn--secondary" id="formCancelBtn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+  <script src="config.js"></script>
+  <script src="auth.js" defer></script>
+  <script src="gallery-data.js" defer></script>
+  <script src="admin-gallery.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+
+</html>

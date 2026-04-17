@@ -27,7 +27,15 @@
         <a href="contact.html">Contact</a>
         <!--<a href="join.html">Join Us</a>-->
         <!--<a href="donate.html">Donate</a>-->
-        <a href="admin-events.html" data-auth-required="ProgramManager" style="display:none;">Admin</a>
+        <div class="nav-admin-dropdown" data-auth-required="ProgramManager" style="display:none;">
+          <button class="nav-admin-dropdown__toggle" aria-expanded="false">Admin &#9662;</button>
+          <div class="nav-admin-dropdown__menu">
+            <a href="admin-events.html">Events</a>
+            <a href="admin-team.html">Team</a>
+            <a href="admin-vendors.html">Vendors</a>
+            <a href="admin-gallery.html">Gallery</a>
+          </div>
+        </div>
         <span id="nav-auth-slot"><a href="login.html" class="nav-login-btn">Login</a></span>
       </div>
     </nav>

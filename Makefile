@@ -78,13 +78,29 @@ minify: ## Minify CSS and JS for production
 	orig = len(open('admin-events.js').read()); \
 	print(f'  admin-events.js: {orig//1024}KB -> {len(js)//1024}KB ({100-len(js)*100//orig}% smaller)') \
 	"
-	@echo "Done! Use styles.min.css, script.min.js, auth.min.js, events.min.js, and admin-events.min.js for production."
+	@for f in team.js vendors-data.js gallery-data.js admin-team.js admin-vendors.js admin-gallery.js; do \
+		echo "Minifying $$f..."; \
+		python3 -c "\
+import re, sys; \
+js = open('$$f').read(); \
+js = re.sub(r'//[^\n]*', '', js); \
+js = re.sub(r'/\*[\s\S]*?\*/', '', js); \
+js = re.sub(r'\n\s*\n+', '\n', js); \
+js = js.strip(); \
+name = '$$f'.replace('.js', '.min.js'); \
+open(name, 'w').write(js); \
+orig = len(open('$$f').read()); \
+print(f'  $$f: {orig//1024}KB -> {len(js)//1024}KB ({100-len(js)*100//orig}% smaller)') \
+"; \
+	done
+	@echo "Done! All JS and CSS files minified for production."
 
 build: optimize minify ## Full production build (optimize + minify)
 	@echo "\nBuild complete!"
 
 clean: ## Remove generated optimized/minified files
 	rm -f styles.min.css script.min.js auth.min.js events.min.js admin-events.min.js
+	rm -f team.min.js vendors-data.min.js gallery-data.min.js admin-team.min.js admin-vendors.min.js admin-gallery.min.js
 	rm -f assets/branding/BgImage.webp assets/branding/BgImage-1200.webp assets/branding/logo.webp
 	rm -f assets/people/*-opt.webp assets/people/*-opt.jpeg
 	@echo "Cleaned generated files."
