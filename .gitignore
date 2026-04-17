@@ -1,0 +1,11 @@
+# Credentials — never commit
+config.js
+supabase-seed.sql
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Minified build output
+*.min.js
+*.min.css

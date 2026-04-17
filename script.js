@@ -105,7 +105,12 @@ async function loadHeader() {
     
     // Set active navigation item
     setActiveNavItem();
-    
+
+    // Update header auth state (login/logout button)
+    if (window.AIKYAM_Auth) {
+      AIKYAM_Auth.updateHeaderAuthState();
+    }
+
     // For home page, also check scroll position
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     if (currentPage === 'index.html' || currentPage === '') {
@@ -413,13 +418,20 @@ async function loadData() {
       }
     }
     
-    // Load events
-    const upcomingResponse = await fetch('./data/upcomingEvents.json');
-    if (!upcomingResponse.ok) throw new Error(`Failed to load upcoming events: ${upcomingResponse.status}`);
-    const upcomingEvents = await upcomingResponse.json();
-    const completedResponse = await fetch('./data/completedEvents.json');
-    if (!completedResponse.ok) throw new Error(`Failed to load completed events: ${completedResponse.status}`);
-    const completedEvents = await completedResponse.json();
+    // Load events (Supabase with JSON fallback)
+    let upcomingEvents, completedEvents;
+    if (window.AIKYAM_Events) {
+      const eventData = await AIKYAM_Events.fetchPublicEvents();
+      upcomingEvents = eventData.upcoming;
+      completedEvents = eventData.past;
+    } else {
+      const upcomingResponse = await fetch('./data/upcomingEvents.json');
+      if (!upcomingResponse.ok) throw new Error(`Failed to load upcoming events: ${upcomingResponse.status}`);
+      upcomingEvents = await upcomingResponse.json();
+      const completedResponse = await fetch('./data/completedEvents.json');
+      if (!completedResponse.ok) throw new Error(`Failed to load completed events: ${completedResponse.status}`);
+      completedEvents = await completedResponse.json();
+    }
     
     // Render past events
     const pastContainer = document.getElementById('pastVLoop');
@@ -638,6 +650,11 @@ document.addEventListener('DOMContentLoaded', async function() {
       window.location.href = 'index.html' + hash;
     }
   });
+
+  // Initialize authentication
+  if (window.AIKYAM_Auth) {
+    AIKYAM_Auth.init();
+  }
 });
 
 /* ===================== HERO PARALLAX MICRO-SWAY ==================== */

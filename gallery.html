@@ -23,7 +23,7 @@
   
   <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://forms.gle https://docs.google.com https://forms.fillout.com https://www.youtube.com; connect-src 'self';" />
+    content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://forms.gle https://docs.google.com https://forms.fillout.com https://www.youtube.com; connect-src 'self' https://*.supabase.co;" />
 
   <!-- Performance optimizations -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -175,7 +175,10 @@
   <!-- Footer will be loaded by JavaScript -->
   <div id="footer-placeholder"></div>
   
-  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+  <script src="config.js"></script>
+  <script src="auth.js" defer></script>
+  <script src="script.js" defer></script>
   <!-- Inline gallery JSON fallback for environments where fetch of JSON fails -->
   <script id="galleryData" type="application/json">[
   {"id":"202508_Pickleball","fileBase":"202508_Pickleball","alt":"Pickleball Q1/Q2/Q3 2025","caption":"Pickleball Q1/Q2/Q3 2025","categories":["community","sports"],"srcsetWebp":["assets/gallery/migrated/202508_Pickleball-800.webp 800w","assets/gallery/migrated/202508_Pickleball-1600.webp 1600w","assets/gallery/migrated/202508_Pickleball.webp 3000w"],"imageJpeg":"assets/gallery/migrated/202508_Pickleball.jpeg"},

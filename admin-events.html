@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Event Management – AIKYAM</title>
+  <meta name="title" content="Event Management – AIKYAM" />
+  <meta name="description" content="Manage AIKYAM community events." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/png" href="assets/branding/logo.png" />
+  <link rel="apple-touch-icon" href="assets/branding/logo.png" />
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co;" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <picture>
+      <source type="image/webp" srcset="assets/branding/BgImage-1200.webp 1200w, assets/branding/BgImage.webp 1920w">
+      <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background">
+    </picture>
+  </div>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="admin-page">
+    <div class="admin-page__container">
+
+      <!-- Page header -->
+      <div class="admin-page__header">
+        <h1 class="admin-page__title">Event Management</h1>
+        <button class="btn btn--primary" id="createEventBtn">+ New Event</button>
+      </div>
+
+      <!-- Status filter tabs -->
+      <div class="admin-tabs" id="statusTabs">
+        <button class="admin-tabs__tab admin-tabs__tab--active" data-status="all">All</button>
+        <button class="admin-tabs__tab" data-status="draft">Draft</button>
+        <button class="admin-tabs__tab" data-status="published">Published</button>
+        <button class="admin-tabs__tab" data-status="deactivated">Deactivated</button>
+        <button class="admin-tabs__tab" data-status="expired">Expired</button>
+      </div>
+
+      <!-- Events list -->
+      <div class="admin-list" id="eventsList">
+        <div class="admin-list__empty">Loading events...</div>
+      </div>
+
+      <!-- Event form modal -->
+      <div class="admin-modal" id="eventModal" style="display:none;" role="dialog" aria-modal="true"
+        aria-label="Event form">
+        <div class="admin-modal__backdrop" id="modalBackdrop"></div>
+        <div class="admin-modal__content">
+          <div class="admin-modal__header">
+            <h2 class="admin-modal__title" id="modalTitle">Create Event</h2>
+            <button class="admin-modal__close" id="modalClose" aria-label="Close">&times;</button>
+          </div>
+
+          <form class="admin-form" id="eventForm" novalidate>
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="evtTitle">Event Title *</label>
+              <input class="admin-form__input" type="text" id="evtTitle" required />
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="evtDesc">Description</label>
+              <textarea class="admin-form__textarea" id="evtDesc" rows="3"></textarea>
+            </div>
+
+            <div class="admin-form__row">
+              <div class="admin-form__group">
+                <label class="admin-form__label" for="evtStart">Start Date/Time</label>
+                <input class="admin-form__input" type="datetime-local" id="evtStart" />
+              </div>
+              <div class="admin-form__group">
+                <label class="admin-form__label" for="evtEnd">End Date/Time</label>
+                <input class="admin-form__input" type="datetime-local" id="evtEnd" />
+              </div>
+            </div>
+
+            <div class="admin-form__row">
+              <div class="admin-form__group">
+                <label class="admin-form__label" for="evtLocation">Location</label>
+                <input class="admin-form__input" type="text" id="evtLocation" value="TBD" />
+              </div>
+              <div class="admin-form__group">
+                <label class="admin-form__label" for="evtPrice">Price ($)</label>
+                <input class="admin-form__input" type="number" id="evtPrice" min="0" step="0.01" value="0" />
+              </div>
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="evtImg">Image Path</label>
+              <input class="admin-form__input" type="text" id="evtImg" value="assets/branding/logo.png" />
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="evtSummary">Summary (shown on past event cards)</label>
+              <input class="admin-form__input" type="text" id="evtSummary" />
+            </div>
+
+            <div class="admin-form__group admin-form__group--inline">
+              <input type="checkbox" id="evtTbd" />
+              <label class="admin-form__label" for="evtTbd">Date TBD (hide exact times from public)</label>
+            </div>
+
+            <div class="admin-form__group">
+              <label class="admin-form__label" for="evtPublishAt">Scheduled Publish Date (optional)</label>
+              <input class="admin-form__input" type="datetime-local" id="evtPublishAt" />
+              <small class="admin-form__hint">Leave empty to publish immediately when clicking Publish</small>
+            </div>
+
+            <p id="formMessage" class="admin-form__message" aria-live="polite"></p>
+
+            <div class="admin-form__actions">
+              <button type="submit" class="btn btn--primary" id="formSubmitBtn">Save as Draft</button>
+              <button type="button" class="btn btn--secondary" id="formCancelBtn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+  <script src="config.js"></script>
+  <script src="auth.js" defer></script>
+  <script src="events.js" defer></script>
+  <script src="admin-events.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+
+</html>

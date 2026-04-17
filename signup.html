@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Login – AIKYAM</title>
-  <meta name="title" content="Login – AIKYAM" />
-  <meta name="description" content="Sign in to your AIKYAM member account." />
+  <title>Create Account – AIKYAM</title>
+  <meta name="title" content="Create Account – AIKYAM" />
+  <meta name="description" content="Create your AIKYAM member account." />
   <meta name="robots" content="noindex, nofollow" />
 
   <link rel="icon" type="image/png" href="assets/branding/logo.png" />
@@ -43,44 +43,41 @@
         <img src="assets/branding/logo.png" alt="AIKYAM Logo" width="72" height="72">
       </div>
 
-      <h1 class="login-card__title">Welcome Back</h1>
-      <p class="login-card__subtitle">Sign in to your AIKYAM account</p>
+      <h1 class="login-card__title">Create Account</h1>
+      <p class="login-card__subtitle">Join the AIKYAM community</p>
 
-      <form class="login-form" id="loginForm" novalidate>
+      <form class="login-form" id="signupForm" novalidate>
         <div class="login-form__group">
-          <label class="login-form__label" for="email">Email Address</label>
-          <input class="login-form__input" type="email" id="email" name="email" autocomplete="email"
+          <label class="login-form__label" for="fullName">Full Name</label>
+          <input class="login-form__input" type="text" id="fullName" name="fullName" autocomplete="name"
+            placeholder="Your full name" required />
+        </div>
+
+        <div class="login-form__group">
+          <label class="login-form__label" for="signupEmail">Email Address</label>
+          <input class="login-form__input" type="email" id="signupEmail" name="email" autocomplete="email"
             placeholder="you@example.com" required />
         </div>
 
         <div class="login-form__group">
-          <label class="login-form__label" for="password">Password</label>
-          <input class="login-form__input" type="password" id="password" name="password" autocomplete="current-password"
-            placeholder="Enter your password" required />
+          <label class="login-form__label" for="signupPassword">Password</label>
+          <input class="login-form__input" type="password" id="signupPassword" name="password"
+            autocomplete="new-password" placeholder="At least 8 characters" required minlength="8" />
         </div>
 
-        <a href="#" class="login-form__forgot" id="forgotPasswordLink">Forgot your password?</a>
+        <div class="login-form__group">
+          <label class="login-form__label" for="confirmPassword">Confirm Password</label>
+          <input class="login-form__input" type="password" id="confirmPassword" name="confirmPassword"
+            autocomplete="new-password" placeholder="Re-enter your password" required />
+        </div>
 
-        <p id="loginMessage" class="login-form__message" aria-live="polite"></p>
+        <p id="signupMessage" class="login-form__message" aria-live="polite"></p>
 
-        <button type="submit" class="login-form__submit">Sign In</button>
+        <button type="submit" class="login-form__submit">Create Account</button>
       </form>
 
-      <!-- Forgot password panel (hidden by default) -->
-      <div class="login-form__forgot-panel" id="forgotPasswordPanel">
-        <form id="forgotPasswordForm" novalidate>
-          <div class="login-form__group">
-            <label class="login-form__label" for="forgotEmail">Enter your email</label>
-            <input class="login-form__input" type="email" id="forgotEmail" name="forgotEmail" autocomplete="email"
-              placeholder="you@example.com" required />
-          </div>
-          <p id="forgotMessage" class="login-form__message" aria-live="polite"></p>
-          <button type="submit" class="login-form__submit">Send Reset Link</button>
-        </form>
-      </div>
-
       <p class="login-form__footer">
-        Don't have an account? <a href="signup.html">Create Account</a>
+        Already have an account? <a href="login.html">Sign In</a>
       </p>
 
     </div>

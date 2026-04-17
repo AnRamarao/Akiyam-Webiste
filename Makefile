@@ -42,13 +42,49 @@ minify: ## Minify CSS and JS for production
 	orig = len(open('script.js').read()); \
 	print(f'  script.js: {orig//1024}KB -> {len(js)//1024}KB ({100-len(js)*100//orig}% smaller)') \
 	"
-	@echo "Done! Use styles.min.css and script.min.js for production."
+	@echo "Minifying auth JS..."
+	@python3 -c "\
+	import re; \
+	js = open('auth.js').read(); \
+	js = re.sub(r'//[^\n]*', '', js); \
+	js = re.sub(r'/\*[\s\S]*?\*/', '', js); \
+	js = re.sub(r'\n\s*\n+', '\n', js); \
+	js = js.strip(); \
+	open('auth.min.js', 'w').write(js); \
+	orig = len(open('auth.js').read()); \
+	print(f'  auth.js: {orig//1024}KB -> {len(js)//1024}KB ({100-len(js)*100//orig}% smaller)') \
+	"
+	@echo "Minifying events JS..."
+	@python3 -c "\
+	import re; \
+	js = open('events.js').read(); \
+	js = re.sub(r'//[^\n]*', '', js); \
+	js = re.sub(r'/\*[\s\S]*?\*/', '', js); \
+	js = re.sub(r'\n\s*\n+', '\n', js); \
+	js = js.strip(); \
+	open('events.min.js', 'w').write(js); \
+	orig = len(open('events.js').read()); \
+	print(f'  events.js: {orig//1024}KB -> {len(js)//1024}KB ({100-len(js)*100//orig}% smaller)') \
+	"
+	@echo "Minifying admin-events JS..."
+	@python3 -c "\
+	import re; \
+	js = open('admin-events.js').read(); \
+	js = re.sub(r'//[^\n]*', '', js); \
+	js = re.sub(r'/\*[\s\S]*?\*/', '', js); \
+	js = re.sub(r'\n\s*\n+', '\n', js); \
+	js = js.strip(); \
+	open('admin-events.min.js', 'w').write(js); \
+	orig = len(open('admin-events.js').read()); \
+	print(f'  admin-events.js: {orig//1024}KB -> {len(js)//1024}KB ({100-len(js)*100//orig}% smaller)') \
+	"
+	@echo "Done! Use styles.min.css, script.min.js, auth.min.js, events.min.js, and admin-events.min.js for production."
 
 build: optimize minify ## Full production build (optimize + minify)
 	@echo "\nBuild complete!"
 
 clean: ## Remove generated optimized/minified files
-	rm -f styles.min.css script.min.js
+	rm -f styles.min.css script.min.js auth.min.js events.min.js admin-events.min.js
 	rm -f assets/branding/BgImage.webp assets/branding/BgImage-1200.webp assets/branding/logo.webp
 	rm -f assets/people/*-opt.webp assets/people/*-opt.jpeg
 	@echo "Cleaned generated files."
