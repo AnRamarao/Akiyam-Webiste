@@ -4163,6 +4163,174 @@ body.light #toast {
   }
 }
 
+/* ===================== REGISTRATION PAGE ===================== */
+
+.register-page {
+  padding-top: calc(var(--header-h) + 40px);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.register-page__container {
+  width: 100%;
+  max-width: 600px;
+  padding: 0 var(--gutter) 60px;
+}
+
+.register-card {
+  background: var(--card-alt);
+  border: 1px solid var(--brd);
+  border-radius: var(--border-radius-sm);
+  padding: 36px 32px;
+  box-shadow: var(--shadow);
+}
+
+.register-card--confirmation {
+  text-align: center;
+}
+
+.register-card__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 64px;
+  text-align: center;
+}
+
+.register-card__title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.register-card__subtitle {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.register-card__details {
+  text-align: left;
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: var(--border-radius-sm);
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.register-card__details p {
+  margin: 4px 0;
+}
+
+.register-card__email-note {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--brd);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.register-form__group {
+  margin-bottom: 16px;
+}
+
+.register-form__label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.register-form__input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 1px solid var(--brd);
+  border-radius: var(--border-radius-sm);
+  background: var(--card);
+  color: var(--text);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.register-form__input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+}
+
+.register-form__textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.register-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.register-form__event-details {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: var(--border-radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.register-form__event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.register-form__message {
+  font-size: 0.85rem;
+  min-height: 1.2em;
+  margin: 8px 0;
+}
+
+.register-form__message--error { color: #ef4444; }
+.register-form__message--success { color: #22c55e; }
+.register-form__message--info { color: var(--accent-text); }
+
+.register-form__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.register-form__submit {
+  flex: 1;
+  min-width: 120px;
+}
+
+@media (max-width: 768px) {
+  .register-page__container {
+    padding: 0 16px 40px;
+  }
+  .register-card {
+    padding: 24px 20px;
+  }
+  .register-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ===================== ADMIN PAGES ===================== */
 
 .admin-page {

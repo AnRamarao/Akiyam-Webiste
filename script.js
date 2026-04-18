@@ -377,72 +377,48 @@ let globalVendors = [];
 async function loadData() {
   
   try {
-    // Load team data (Supabase with JSON fallback)
-    let teamData;
-    if (window.AIKYAM_Team) {
-      teamData = await AIKYAM_Team.fetchPublicTeam();
-    } else {
-      // JSON fallback
-      const [boardResp, coreResp, core2026Resp] = await Promise.all([
-        fetch('./data/boardMembers.json'),
-        fetch('./data/coreTeam.json'),
-        fetch('./data/coreTeam2026.json')
-      ]);
-      const board = boardResp.ok ? await boardResp.json() : { chairman: null, members: [] };
-      const core = coreResp.ok ? await coreResp.json() : [];
-      const core2026 = core2026Resp.ok ? await core2026Resp.json() : [];
-      teamData = { chairman: board.chairman, boardMembers: board.members || [], executiveByYear: { 2025: core, 2026: core2026 } };
-    }
+    // Load team data from Supabase
+    const teamData = window.AIKYAM_Team
+      ? await AIKYAM_Team.fetchPublicTeam()
+      : { chairman: null, boardMembers: [], executiveByYear: {} };
 
-    // Render core team (current year executive committee)
-    const currentYear = new Date().getFullYear();
-    const coreTeam = teamData.executiveByYear[currentYear] || teamData.executiveByYear[currentYear - 1] || [];
-    const coreContainer = document.getElementById('coreCards');
-    if (coreContainer && Array.isArray(coreTeam)) {
-      coreContainer.innerHTML = '';
-      coreTeam.forEach(member => {
-        const card = document.createElement('div');
-        card.className = 'person-card';
-        card.innerHTML = personCardHTML(member);
-        const img = card.querySelector('img');
-        if (img) attachImageFallback(img, member.name);
-        coreContainer.appendChild(card);
-      });
-    }
+    // Render executive committees by year (newest first)
+    const execContainer = document.getElementById('executiveTeams');
+    if (execContainer && teamData.executiveByYear) {
+      execContainer.innerHTML = '';
+      const years = Object.keys(teamData.executiveByYear).sort((a, b) => b - a);
+      years.forEach(year => {
+        const members = teamData.executiveByYear[year];
+        if (!Array.isArray(members) || members.length === 0) return;
 
-    // Render next year executive committee if available
-    const core2026Container = document.getElementById('coreTeam2026Cards');
-    if (core2026Container) {
-      const nextYearTeam = teamData.executiveByYear[currentYear + 1] || [];
-      if (nextYearTeam.length > 0) {
-        core2026Container.innerHTML = '';
-        nextYearTeam.forEach(member => {
+        const heading = document.createElement('h2');
+        heading.className = 'section-title';
+        heading.textContent = 'Executive Committee - ' + year;
+
+        const cards = document.createElement('div');
+        cards.className = 'cards';
+        cards.setAttribute('aria-label', 'Executive Committee ' + year);
+
+        members.forEach(member => {
           const card = document.createElement('div');
           card.className = 'person-card';
           card.innerHTML = personCardHTML(member);
           const img = card.querySelector('img');
           if (img) attachImageFallback(img, member.name);
-          core2026Container.appendChild(card);
+          cards.appendChild(card);
         });
-      } else {
-        core2026Container.innerHTML = '<div class="hint" style="padding:24px;text-align:center;">No Executive Committee members for next year yet.</div>';
-      }
+
+        execContainer.appendChild(heading);
+        execContainer.appendChild(cards);
+      });
     }
     
-    // Load events (Supabase with JSON fallback)
-    let upcomingEvents, completedEvents;
-    if (window.AIKYAM_Events) {
-      const eventData = await AIKYAM_Events.fetchPublicEvents();
-      upcomingEvents = eventData.upcoming;
-      completedEvents = eventData.past;
-    } else {
-      const upcomingResponse = await fetch('./data/upcomingEvents.json');
-      if (!upcomingResponse.ok) throw new Error(`Failed to load upcoming events: ${upcomingResponse.status}`);
-      upcomingEvents = await upcomingResponse.json();
-      const completedResponse = await fetch('./data/completedEvents.json');
-      if (!completedResponse.ok) throw new Error(`Failed to load completed events: ${completedResponse.status}`);
-      completedEvents = await completedResponse.json();
-    }
+    // Load events from Supabase
+    const eventData = window.AIKYAM_Events
+      ? await AIKYAM_Events.fetchPublicEvents()
+      : { upcoming: [], past: [] };
+    const upcomingEvents = eventData.upcoming;
+    const completedEvents = eventData.past;
     
     // Render past events
     const pastContainer = document.getElementById('pastVLoop');
@@ -507,7 +483,7 @@ async function loadData() {
           <div class="event-desc">${event.location || 'TBD'} • ${event.price > 0 ? '$' + event.price : 'Free'}</div>
           <div class="event-actions" style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
             ${event.tbd ? '' : `<button class="btn mini secondary add-to-cal-btn" data-event-id="${event.id}">📅 Add to Calendar</button>`}
-            ${event.tbd ? '' : `<a class="btn mini outline" href="#register">Register</a>`}
+            ${event.tbd ? '' : `<a class="btn mini outline" href="register.html?event=${event.id}">Register</a>`}
           </div>
         `;
         
@@ -566,14 +542,10 @@ async function loadData() {
     // Render calendar
     renderCalendar(upcomingEvents);
     
-    // Load vendors (Supabase with JSON fallback)
-    if (window.AIKYAM_Vendors) {
-      globalVendors = await AIKYAM_Vendors.fetchPublicVendors();
-    } else {
-      const vendorsResponse = await fetch('./data/vendors.json');
-      if (!vendorsResponse.ok) throw new Error(`Failed to load vendors data: ${vendorsResponse.status}`);
-      globalVendors = await vendorsResponse.json();
-    }
+    // Load vendors from Supabase
+    globalVendors = window.AIKYAM_Vendors
+      ? await AIKYAM_Vendors.fetchPublicVendors()
+      : [];
 
     if (!Array.isArray(globalVendors)) {
       throw new Error('Vendors data is not in expected format');
@@ -1281,24 +1253,10 @@ async function loadGallery() {
   grid.innerHTML = '<div class="hint">Loading gallery...</div>';
   grid.setAttribute('aria-busy', 'true');
   try {
-    // Load gallery data (Supabase with JSON fallback)
-    let items;
-    if (window.AIKYAM_Gallery) {
-      items = await AIKYAM_Gallery.fetchPublicGallery();
-    } else {
-      let res;
-      try { res = await fetch('./data/galleryImages.json'); } catch (e) { /* ignore */ }
-      if (!res || !res.ok) {
-        try { res = await fetch('/data/galleryImages.json'); } catch (e) { /* ignore */ }
-      }
-      if (!res || !res.ok) {
-        const inline = document.getElementById('galleryData');
-        if (inline) items = JSON.parse(inline.textContent || '[]');
-      } else {
-        items = await res.json();
-      }
-    }
-    if (!items) items = [];
+    // Load gallery data from Supabase
+    const items = window.AIKYAM_Gallery
+      ? await AIKYAM_Gallery.fetchPublicGallery()
+      : [];
     if (!Array.isArray(items)) throw new Error('Invalid gallery manifest');
     grid.innerHTML = '';
     items.forEach(item => {

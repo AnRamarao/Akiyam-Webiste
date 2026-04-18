@@ -483,7 +483,102 @@ CREATE POLICY "Admins can delete gallery images"
   USING (public.user_is_admin());
 
 -- ============================================================
--- 12. OPTIONAL: pg_cron scheduled jobs (run after enabling pg_cron extension)
+-- 12. EVENT REGISTRATIONS TABLE
+-- ============================================================
+-- Public (anonymous) event registration — no login required
+
+CREATE TABLE IF NOT EXISTS public.event_registrations (
+  id          UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  event_id    UUID NOT NULL REFERENCES public.events(id) ON DELETE CASCADE,
+  full_name   TEXT NOT NULL,
+  email       TEXT NOT NULL,
+  phone       TEXT NOT NULL DEFAULT '',
+  guests      INT DEFAULT 1 CHECK (guests >= 1 AND guests <= 20),
+  notes       TEXT DEFAULT '',
+  confirmed   BOOLEAN DEFAULT false,
+  created_at  TIMESTAMPTZ DEFAULT now()
+);
+
+ALTER TABLE public.event_registrations ENABLE ROW LEVEL SECURITY;
+
+CREATE INDEX IF NOT EXISTS idx_event_reg_event ON public.event_registrations (event_id);
+CREATE INDEX IF NOT EXISTS idx_event_reg_email ON public.event_registrations (email);
+
+-- RLS: Anyone can insert (public registration, no login)
+DO $$ BEGIN
+  DROP POLICY IF EXISTS "Anyone can register for events"       ON public.event_registrations;
+  DROP POLICY IF EXISTS "Staff can read registrations"          ON public.event_registrations;
+  DROP POLICY IF EXISTS "ContentManagers can manage registrations" ON public.event_registrations;
+  DROP POLICY IF EXISTS "Admins can delete registrations"       ON public.event_registrations;
+END $$;
+
+CREATE POLICY "Anyone can register for events"
+  ON public.event_registrations FOR INSERT
+  WITH CHECK (true);
+
+CREATE POLICY "Staff can read registrations"
+  ON public.event_registrations FOR SELECT
+  USING (public.user_has_min_role('ProgramManager'));
+
+CREATE POLICY "ContentManagers can manage registrations"
+  ON public.event_registrations FOR UPDATE
+  USING (public.user_has_min_role('ContentManager'));
+
+CREATE POLICY "Admins can delete registrations"
+  ON public.event_registrations FOR DELETE
+  USING (public.user_is_admin());
+
+-- ============================================================
+-- 13. EMAIL CONFIRMATION FOR REGISTRATIONS (optional setup)
+-- ============================================================
+-- To enable automatic email confirmations:
+--   1. Enable the pg_net extension: Dashboard > Database > Extensions > pg_net
+--   2. Sign up for Resend (https://resend.com) — free: 3000 emails/month
+--   3. Add your Resend API key below (replace 're_xxxxxxxxxxxx')
+--   4. Verify your sending domain in Resend
+--   5. Run the function + trigger below
+--
+-- CREATE OR REPLACE FUNCTION public.send_registration_confirmation()
+-- RETURNS TRIGGER AS $$
+-- DECLARE
+--   _event_title TEXT;
+--   _event_date  TEXT;
+--   _event_location TEXT;
+-- BEGIN
+--   SELECT title, COALESCE(TO_CHAR(start_at AT TIME ZONE 'America/Los_Angeles', 'Mon DD, YYYY h:MI AM'), 'TBD'), COALESCE(location, 'TBD')
+--   INTO _event_title, _event_date, _event_location
+--   FROM public.events WHERE id = NEW.event_id;
+--
+--   PERFORM net.http_post(
+--     url     := 'https://api.resend.com/emails',
+--     headers := jsonb_build_object(
+--       'Authorization', 'Bearer re_xxxxxxxxxxxx',
+--       'Content-Type',  'application/json'
+--     ),
+--     body := jsonb_build_object(
+--       'from',    'AIKYAM <noreply@aikyamusa.org>',
+--       'to',      ARRAY[NEW.email],
+--       'subject', 'Registration Confirmed — ' || _event_title,
+--       'html',    '<h2>Hello ' || NEW.full_name || ',</h2>'
+--                  || '<p>Your registration for <strong>' || _event_title || '</strong> has been confirmed!</p>'
+--                  || '<p><strong>Date:</strong> ' || _event_date || '<br>'
+--                  || '<strong>Location:</strong> ' || _event_location || '<br>'
+--                  || '<strong>Guests:</strong> ' || NEW.guests || '</p>'
+--                  || '<p>Thank you for registering. We look forward to seeing you!</p>'
+--                  || '<p>— AIKYAM Team</p>'
+--     )
+--   );
+--   RETURN NEW;
+-- END;
+-- $$ LANGUAGE plpgsql SECURITY DEFINER;
+--
+-- DROP TRIGGER IF EXISTS on_registration_created ON public.event_registrations;
+-- CREATE TRIGGER on_registration_created
+--   AFTER INSERT ON public.event_registrations
+--   FOR EACH ROW EXECUTE FUNCTION public.send_registration_confirmation();
+
+-- ============================================================
+-- 14. OPTIONAL: pg_cron scheduled jobs (run after enabling pg_cron extension)
 -- ============================================================
 -- Enable pg_cron in Supabase: Dashboard > Database > Extensions > pg_cron
 -- Then run:

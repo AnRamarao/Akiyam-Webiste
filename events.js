@@ -2,7 +2,6 @@
   AIKYAM — Events Module (Supabase)
   - CRUD operations for event management
   - Content lifecycle: Draft → Published → Deactivated → Expired
-  - Public fetch with JSON fallback for graceful degradation
 */
 
 (function () {
@@ -100,13 +99,12 @@
             past: (pastResult.data || []).map(mapToPastFormat)
           };
         }
-        console.warn('AIKYAM Events: Supabase query error, falling back to JSON');
+        console.warn('AIKYAM Events: Supabase query error');
       } catch (e) {
-        console.warn('AIKYAM Events: Supabase fetch failed, falling back to JSON', e.message);
+        console.warn('AIKYAM Events: Supabase fetch failed', e.message);
       }
     }
-
-    return fetchFromJSON();
+    return { upcoming: [], past: [] };
   }
 
   /* ===================== ADMIN FETCH ===================== */
@@ -217,22 +215,6 @@
       return { error: { message: 'Only ContentManager or above can schedule publishing' } };
     }
     return updateEvent(id, { publish_at: publishAt, status: STATUS.DRAFT });
-  }
-
-  /* ===================== JSON FALLBACK ===================== */
-  async function fetchFromJSON() {
-    try {
-      var results = await Promise.all([
-        fetch('./data/upcomingEvents.json'),
-        fetch('./data/completedEvents.json')
-      ]);
-      var upcoming = results[0].ok ? await results[0].json() : [];
-      var past = results[1].ok ? await results[1].json() : [];
-      return { upcoming: upcoming, past: past };
-    } catch (e) {
-      console.error('AIKYAM Events: JSON fallback also failed', e.message);
-      return { upcoming: [], past: [] };
-    }
   }
 
   /* ===================== PUBLIC API ===================== */

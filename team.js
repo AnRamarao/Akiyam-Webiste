@@ -2,7 +2,6 @@
   AIKYAM — Team Module (Supabase)
   - CRUD operations for team member management
   - Covers board members and executive committees by year
-  - Public fetch with JSON fallback for graceful degradation
 */
 
 (function () {
@@ -63,12 +62,12 @@
             executiveByYear: executiveByYear
           };
         }
-        console.warn('AIKYAM Team: Supabase query error, falling back to JSON');
+        console.warn('AIKYAM Team: Supabase query error');
       } catch (e) {
-        console.warn('AIKYAM Team: Supabase fetch failed, falling back to JSON', e.message);
+        console.warn('AIKYAM Team: Supabase fetch failed', e.message);
       }
     }
-    return fetchFromJSON();
+    return { chairman: null, boardMembers: [], executiveByYear: {} };
   }
 
   /* ===================== ADMIN FETCH ===================== */
@@ -133,30 +132,6 @@
 
     var { error } = await client.from('team_members').delete().eq('id', id);
     return { error: error };
-  }
-
-  /* ===================== JSON FALLBACK ===================== */
-  async function fetchFromJSON() {
-    try {
-      var results = await Promise.all([
-        fetch('./data/boardMembers.json'),
-        fetch('./data/coreTeam.json'),
-        fetch('./data/coreTeam2026.json')
-      ]);
-      var board = results[0].ok ? await results[0].json() : { chairman: null, members: [] };
-      var core = results[1].ok ? await results[1].json() : [];
-      var core2026 = results[2].ok ? await results[2].json() : [];
-
-      // Map to match coreTeam naming: name, role, img -> name, role, img (already matches)
-      return {
-        chairman: board.chairman || null,
-        boardMembers: board.members || [],
-        executiveByYear: { 2025: core, 2026: core2026 }
-      };
-    } catch (e) {
-      console.error('AIKYAM Team: JSON fallback failed', e.message);
-      return { chairman: null, boardMembers: [], executiveByYear: {} };
-    }
   }
 
   /* ===================== PUBLIC API ===================== */

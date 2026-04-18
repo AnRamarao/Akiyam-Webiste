@@ -1,7 +1,6 @@
 /*
   AIKYAM — Gallery Module (Supabase)
   - CRUD operations for gallery image management
-  - Public fetch with JSON fallback for graceful degradation
 */
 
 (function () {
@@ -45,12 +44,12 @@
         if (!error && data) {
           return data.map(mapToGalleryFormat);
         }
-        console.warn('AIKYAM Gallery: Supabase query error, falling back to JSON');
+        console.warn('AIKYAM Gallery: Supabase query error');
       } catch (e) {
-        console.warn('AIKYAM Gallery: Supabase fetch failed, falling back to JSON', e.message);
+        console.warn('AIKYAM Gallery: Supabase fetch failed', e.message);
       }
     }
-    return fetchFromJSON();
+    return [];
   }
 
   /* ===================== ADMIN FETCH ===================== */
@@ -115,17 +114,6 @@
 
     var { error } = await client.from('gallery_images').delete().eq('id', id);
     return { error: error };
-  }
-
-  /* ===================== JSON FALLBACK ===================== */
-  async function fetchFromJSON() {
-    try {
-      var resp = await fetch('./data/galleryImages.json');
-      return resp.ok ? await resp.json() : [];
-    } catch (e) {
-      console.error('AIKYAM Gallery: JSON fallback failed', e.message);
-      return [];
-    }
   }
 
   /* ===================== PUBLIC API ===================== */

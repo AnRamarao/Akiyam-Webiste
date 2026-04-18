@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Registration Management – AIKYAM</title>
+  <meta name="title" content="Registration Management – AIKYAM" />
+  <meta name="description" content="Manage AIKYAM event registrations." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/png" href="assets/branding/logo.png" />
+  <link rel="apple-touch-icon" href="assets/branding/logo.png" />
+
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co;" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <picture>
+      <source type="image/webp" srcset="assets/branding/BgImage-1200.webp 1200w, assets/branding/BgImage.webp 1920w">
+      <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background">
+    </picture>
+  </div>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="admin-page">
+    <div class="admin-page__container">
+
+      <div class="admin-page__header">
+        <h1 class="admin-page__title">Event Registrations</h1>
+        <span class="admin-page__count" id="regCount"></span>
+      </div>
+
+      <div class="admin-tabs" id="eventTabs">
+        <button class="admin-tabs__tab admin-tabs__tab--active" data-event="all">All Events</button>
+        <!-- Event tabs populated dynamically -->
+      </div>
+
+      <div class="admin-list" id="registrationsList">
+        <div class="admin-list__empty">Loading registrations...</div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+  <script src="config.js"></script>
+  <script src="auth.js" defer></script>
+  <script src="event-registration.js" defer></script>
+  <script src="admin-registrations.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+
+</html>

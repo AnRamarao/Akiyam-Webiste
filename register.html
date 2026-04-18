@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Event Registration – AIKYAM</title>
+  <meta name="title" content="Event Registration – AIKYAM" />
+  <meta name="description" content="Register for AIKYAM community events. Free and open to all!" />
+
+  <link rel="icon" type="image/png" href="assets/branding/logo.png" />
+  <link rel="apple-touch-icon" href="assets/branding/logo.png" />
+
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co;" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="tricolor" aria-hidden="true"></div>
+
+  <div id="bg-zoom" aria-hidden="true">
+    <picture>
+      <source type="image/webp" srcset="assets/branding/BgImage-1200.webp 1200w, assets/branding/BgImage.webp 1920w">
+      <img id="bgZoomImg" src="assets/branding/BgImage.png" alt="AIKYAM community background">
+    </picture>
+  </div>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="register-page">
+    <div class="register-page__container">
+
+      <!-- Registration Form -->
+      <div class="register-card" id="registerCard">
+        <h1 class="register-card__title">Event Registration</h1>
+        <p class="register-card__subtitle">Register for an upcoming AIKYAM event. No account required!</p>
+
+        <form class="register-form" id="registerForm" novalidate>
+          <div class="register-form__group">
+            <label class="register-form__label" for="regEvent">Event *</label>
+            <select class="register-form__input" id="regEvent" required>
+              <option value="">Loading events...</option>
+            </select>
+          </div>
+
+          <div id="eventDetails" class="register-form__event-details" style="display:none;"></div>
+
+          <div class="register-form__group">
+            <label class="register-form__label" for="regName">Full Name *</label>
+            <input class="register-form__input" type="text" id="regName" placeholder="Your full name" required />
+          </div>
+
+          <div class="register-form__group">
+            <label class="register-form__label" for="regEmail">Email *</label>
+            <input class="register-form__input" type="email" id="regEmail" placeholder="you@example.com" required />
+          </div>
+
+          <div class="register-form__row">
+            <div class="register-form__group">
+              <label class="register-form__label" for="regPhone">Phone</label>
+              <input class="register-form__input" type="tel" id="regPhone" placeholder="(555) 123-4567" />
+            </div>
+            <div class="register-form__group">
+              <label class="register-form__label" for="regGuests">Number of Guests</label>
+              <input class="register-form__input" type="number" id="regGuests" value="1" min="1" max="20" />
+            </div>
+          </div>
+
+          <div class="register-form__group">
+            <label class="register-form__label" for="regNotes">Notes (optional)</label>
+            <textarea class="register-form__input register-form__textarea" id="regNotes" rows="3"
+              placeholder="Dietary restrictions, accessibility needs, etc."></textarea>
+          </div>
+
+          <p id="formMessage" class="register-form__message" aria-live="polite"></p>
+
+          <div class="register-form__actions">
+            <button type="submit" class="btn btn--primary register-form__submit" id="formSubmitBtn">Register</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Confirmation (shown after successful registration) -->
+      <div class="register-card register-card--confirmation" id="confirmationCard" style="display:none;">
+        <div class="register-card__icon">&#10003;</div>
+        <h1 class="register-card__title">You're Registered!</h1>
+        <p class="register-card__subtitle" id="confirmationText">
+          Thank you for registering. We look forward to seeing you!
+        </p>
+        <div class="register-card__details" id="confirmationDetails"></div>
+        <div class="register-form__actions">
+          <a href="index.html" class="btn btn--primary">Back to Home</a>
+          <button type="button" class="btn btn--secondary" id="registerAnotherBtn">Register for Another Event</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+  <script src="config.js"></script>
+  <script src="auth.js" defer></script>
+  <script src="event-registration.js" defer></script>
+  <script src="register-page.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+
+</html>
